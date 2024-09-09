@@ -1,4 +1,4 @@
-ID Alumno;Nombre;Apellido;P1;P2
+Legajo;Nombre;Apellido;nota1;nota2
 1;Juan;Martinez;82;30
 2;Pedro;Perez;90;80
 3;Juana;Liz;100;98
