@@ -119,7 +119,7 @@ def ejecutar_opcion_cursada(opcion_cursada, lista_diccionarios):
         print("Opción no válida. Intenta nuevamente.")
 
 def main():
-    with open('C:\\Users\\matyb\\OneDrive\\Documents\\Mati\\Facultad\\Materias\\2024\\2do Cuatri 2024\\Algoritmos y estructura de datos 1\\TPO_Testing\\archivosjson\\datosAlumnos.csv', mode='r') as archivo_csv:
+    with open('archivosjson\datosAlumnos.csv', mode='r') as archivo_csv:
         lector_csv = csv.DictReader(archivo_csv, delimiter=';')
         print("Encabezados del CSV:", lector_csv.fieldnames)  # Imprime los nombres de las columnas
         lista_diccionarios = [fila for fila in lector_csv]
