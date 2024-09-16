@@ -26,20 +26,33 @@ def clasificar_cursada(alumnos, nota_aprobacion=40, nota_promocion=80):
 
     return promocionados, aprobados, aplazados
 
-def ejecutar_opcion_cursada(opcion_cursada, lista_diccionarios):
+def ejecutar_opcion_cursada(lista_diccionarios):
     promocionados, aprobados, aplazados = clasificar_cursada(lista_diccionarios)
+    bandera = True
+    while bandera:
+        print("\n--- Opciones de Cursada ---")
+        print("1. Ver Promocionados")
+        print("2. Ver Aprobados")
+        print("3. Ver Aplazados")
+        print("4. Volver al menú principal")
+        
+        opcion_cursada = input("Selecciona una opción (1, 2, 3, 4 para salir): ").lower()
 
-    if opcion_cursada == '1':
-        print("\n--- Promocionados ---")
-        for alumno in promocionados:
-            print(f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}")
-    elif opcion_cursada == '2':
-        print("\n--- Aprobados ---")
-        for alumno in aprobados:
-            print(f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}")
-    elif opcion_cursada == '3':
-        print("\n--- Aplazados ---")
-        for alumno in aplazados:
-            print(f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}")
-    else:
-        print("Opción no válida. Intenta nuevamente.")
+        if opcion_cursada == '1':
+            print("\n--- Promocionados ---")
+            for alumno in promocionados:
+                print(f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}")
+        elif opcion_cursada == '2':
+            print("\n--- Aprobados ---")
+            for alumno in aprobados:
+                print(f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}")
+        elif opcion_cursada == '3':
+            print("\n--- Aplazados ---")
+            for alumno in aplazados:
+                print(f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}")
+                
+        elif opcion_cursada == '4':
+            print("\n--- Volviendo al menú principal... ---")
+            bandera = False 
+        else:
+            print("Opción no válida. Intenta nuevamente.")
