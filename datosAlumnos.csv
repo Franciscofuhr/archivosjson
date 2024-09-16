@@ -24,7 +24,7 @@ Legajo;Nombre;Apellido;nota1;nota2
 23;Fernando;Navarro;94;87
 24;Cristina;Reyes;73;79
 25;Sergio;Molina;12;76
-26;Alicia;Ortega;80;84
+26;Alicia;Ortega;25;84
 27;Esteban;Cruz;61;53
 28;Marta;Delgado;35;81
 29;Andres;Santos;17;74
@@ -44,9 +44,9 @@ Legajo;Nombre;Apellido;nota1;nota2
 43;Ruben;Salas;87;84
 44;Adriana;Gallego;76;77
 45;Cristian;Moya;5;61
-46;Andrea;Aguilar;95;96
+46;Andrea;Aguilar;35;96
 47;Francisco;Blanco;92;23
 48;Isabel;Paredes;66;68
-49;Gonzalo;Moreno;69;73
+49;Gonzalo;Moreno;14;73
 50;Miriam;Soto;13;82
 51;Mati;Rejio;85;82
