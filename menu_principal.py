@@ -19,11 +19,7 @@ def mostrar_menu_parcial():
     print(f"{Fore.CYAN}1. {Fore.RESET}1er Parcial")
     print(f"{Fore.CYAN}2. {Fore.RESET}2do Parcial")
 
-def mostrar_menu_cursada():
-    print(f"\n{Fore.YELLOW}--- Cursada ---")
-    print(f"{Fore.CYAN}1. {Fore.RESET}Promocionado")
-    print(f"{Fore.CYAN}2. {Fore.RESET}Aprobado")
-    print(f"{Fore.CYAN}3. {Fore.RESET}Aplazado")
+
 
 def main():
     with open('archivosjson\datosAlumnos.csv', mode='r') as archivo_csv:
@@ -44,9 +40,7 @@ def main():
             opcion_parcial = input(f"{Fore.GREEN}Selecciona una opción (1, 2): {Fore.RESET}").lower()
             ejecutar_opcion_parcial(opcion_parcial, lista_diccionarios)
         elif opcion_principal == '2':
-            mostrar_menu_cursada()
-            opcion_cursada = input(f"{Fore.GREEN}Selecciona una opción (1, 2, 3): {Fore.RESET}").lower()
-            ejecutar_opcion_cursada(opcion_cursada, lista_diccionarios)
+            ejecutar_opcion_cursada( lista_diccionarios)
         elif opcion_principal == '3':
             buscar_alumno(lista_diccionarios)
         else:
