@@ -1,8 +1,10 @@
+from colorama import Fore, Style
+
 def mostrar_menu_aprobados_desaprobados():
-    print("\n--- Opciones ---")
-    print("1. Aprobados")
-    print("2. Desaprobados")
-    print("3. Salir")
+    print(f"{Fore.YELLOW}\n--- Opciones ---{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}1. {Fore.RESET}Aprobados")
+    print(f"{Fore.CYAN}2. {Fore.RESET}Desaprobados")
+    print(f"{Fore.CYAN}3. {Fore.RESET}Salir")
 
 def clasificar_parcial(alumnos, parcial, nota_aprobacion=60):
     aprobados = []
@@ -21,9 +23,9 @@ def clasificar_parcial(alumnos, parcial, nota_aprobacion=60):
                 else:
                     desaprobados.append((legajo, nombre, apellido, nota))
             else:
-                print(f"Error: La nota '{nota}' no es un número válido.")
+                print(Fore.RED + f"Error: La nota '{nota}' no es un número válido." + Style.RESET_ALL)
         else:
-            print(f"Error: La columna '{parcial}' no existe en los datos.")
+            print(Fore.RED + f"Error: La columna '{parcial}' no existe en los datos." + Style.RESET_ALL)
 
     return aprobados, desaprobados
 
@@ -37,30 +39,30 @@ def ejecutar_opcion_parcial(opcion_parcial, lista_diccionarios):
             parcial = 'nota2'
             parcial_nombre = '2do Parcial'
         else:
-            print("Opción no válida. Intenta nuevamente.")
+            print(f"{Fore.RED}Opción no válida. Intenta nuevamente.")
             return
 
         mostrar_menu_aprobados_desaprobados()
     
-        opcion_aprobado_desaprobado = input("Selecciona una opción (1, 2 o 3): ").lower()
+        opcion_aprobado_desaprobado = input(f"{Fore.GREEN}Selecciona una opción (1, 2 o 3): ").lower()
 
         aprobados, desaprobados = clasificar_parcial(lista_diccionarios, parcial)
     
         
         if opcion_aprobado_desaprobado == '1':
-            print(f"\n--- Aprobados {parcial_nombre} ---")
+            print(f"{Fore.YELLOW}\n--- Aprobados {parcial_nombre} ---")
             for alumno in aprobados:
-                print(f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: {alumno[3]}")
+               print(Fore.MAGENTA + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: {alumno[3]}" + Style.RESET_ALL)
             continue
         elif opcion_aprobado_desaprobado == '2':
-            print(f"\n--- Desaprobados {parcial_nombre} ---")
+            print(f"{Fore.YELLOW}\n--- Desaprobados {parcial_nombre} ---")
             for alumno in desaprobados:
-                print(f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: {alumno[3]}")
+                print(Fore.MAGENTA + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: {alumno[3]}" + Style.RESET_ALL)
             continue
         elif opcion_aprobado_desaprobado == '3':
-            print(f"\n--- Saliendo... ---")
+            print(f"{Fore.RED}\n--- Saliendo... ---")
             bandera=False
             
         else:
-            print("Opción no válida. Intenta nuevamente.")
+           print(f"{Fore.RED}Opción no válida. Intenta nuevamente.")
 

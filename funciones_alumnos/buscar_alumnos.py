@@ -1,17 +1,17 @@
+from colorama import Fore, Style
+
 def buscar_alumno(lista_diccionarios):
     bandera_principal = True
 
     while bandera_principal:
-        print("Opciones de búsqueda:")
-        print("1. Buscar por ID")
-        print("2. Buscar por Nombre")
-        print("3. Buscar por Apellido")
-        print("4. Volver al menú principal")
-        
-        opcion = input("Elige una opción (1, 2, 3 o 4 para volver al menú principal): ")
+        print(f"{Fore.YELLOW}--- Opciones de búsqueda ---{Style.RESET_ALL}")
+        print(f"{Fore.CYAN}1. {Fore.RESET}Buscar por ID")
+        print(f"{Fore.CYAN}2. {Fore.RESET}Buscar por Nombre")
+        print(f"{Fore.CYAN}3. {Fore.RESET}Buscar por Apellido")
+        opcion = input(f"{Fore.GREEN}Elige una opción (1, 2, 3 o 4 para volver al menú principal): ")
 
         if opcion == '4':
-            print("Volviendo al menú principal...")
+            print(f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}")
             bandera_principal = False
             continue
         
@@ -20,9 +20,9 @@ def buscar_alumno(lista_diccionarios):
         
         while bandera_busqueda:
             if opcion == '1':
-                id_alumno = input("Introduce el ID del alumno o -1 para regresar al menú de búsqueda: ")
+                id_alumno = input(f"{Fore.CYAN}Introduce el ID del alumno o -1 para regresar al menú de búsqueda: ")
                 if id_alumno == '-1':
-                    print("Volviendo al menú de búsqueda...")
+                    print(f"{Fore.YELLOW}Volviendo al menú de búsqueda...")
                     bandera_busqueda = False
                     continue  
                 for persona in lista_diccionarios:
@@ -30,9 +30,9 @@ def buscar_alumno(lista_diccionarios):
                         resultado.append(persona)
             
             elif opcion == '2':
-                nombre = input("Introduce el nombre del alumno o -1 para regresar al menú de búsqueda: ")
+                nombre = input(f"{Fore.CYAN}Introduce el nombre del alumno o -1 para regresar al menú de búsqueda: ")
                 if nombre == '-1':
-                    print("Volviendo al menú de búsqueda...")
+                    print(f"{Fore.YELLOW}Volviendo al menú de búsqueda...")
                     bandera_busqueda = False
                     continue  
                 for persona in lista_diccionarios:
@@ -40,9 +40,9 @@ def buscar_alumno(lista_diccionarios):
                         resultado.append(persona)
             
             elif opcion == '3':
-                apellido = input("Introduce el apellido del alumno o -1 para regresar al menú de búsqueda: ")
+                apellido = input(f"{Fore.CYAN}Introduce el apellido del alumno o -1 para regresar al menú de búsqueda: ")
                 if apellido == '-1':
-                    print("Volviendo al menú de búsqueda...")
+                    print(f"{Fore.YELLOW}Volviendo al menú de búsqueda...")
                     bandera_busqueda = False
                     continue  
                 for persona in lista_diccionarios:
@@ -50,15 +50,15 @@ def buscar_alumno(lista_diccionarios):
                         resultado.append(persona)
             
             else:
-                print("Opción no válida.")
+                print(f"{Fore.YELLOW}Opción no válida.")
                 bandera_busqueda = False
                 continue
 
             # Imprimir resultado de la búsqueda
             if resultado:
                 for persona in resultado:
-                    print(f"Legajo: {persona['Legajo']}, {persona['Nombre']} {persona['Apellido']}: 1er Parcial: {persona['nota1']} / 2do Parcial: {persona['nota2']}")
+                    print(f"{Fore.MAGENTA}Legajo: {persona['Legajo']}, {persona['Nombre']} {persona['Apellido']}: 1er Parcial: {persona['nota1']} / 2do Parcial: {persona['nota2']}")
             else:
-                print("No se encontraron coincidencias")
+                print(f"{Fore.RED}No se encontraron coincidencias")
             print("")
 
