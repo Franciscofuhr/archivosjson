@@ -23,6 +23,50 @@ def clasificar_parcial(alumnos, parcial, nota_aprobacion=60):
 
     return aprobados, desaprobados
 
+
+# Función para buscar por ID, Nombre o Apellido
+def buscar_alumno(lista_diccionarios):
+    print("Opciones de búsqueda:")
+    print("1. Buscar por ID")
+    print("2. Buscar por Nombre")
+    print("3. Buscar por Apellido")
+    
+    opcion = input("Elige una opción (1, 2 o 3): ")
+    
+    resultado = []
+    
+    if opcion == '1':
+        id_alumno = input("Introduce el ID del alumno: ")
+        for persona in lista_diccionarios:
+            if persona['Legajo'] == id_alumno:
+                resultado.append(persona)
+    
+    elif opcion == '2':
+        nombre = input("Introduce el nombre del alumno: ")
+        for persona in lista_diccionarios:
+            if persona['Nombre'] == nombre:
+                resultado.append(persona)
+    
+    elif opcion == '3':
+        apellido = input("Introduce el apellido del alumno: ")
+        for persona in lista_diccionarios:
+            if persona['Apellido'] == apellido:
+                resultado.append(persona)
+    
+    else:
+        print("Opción no válida")
+        return
+    
+    # Imprimir resultado de la búsqueda
+    if resultado:
+        for persona in resultado:
+            print(f"Legajo: {persona['Legajo']}, {persona['Nombre']} {persona['Apellido']}: 1er Parcial: {persona['nota1']} / 2do Parcial: {persona['nota2']}")
+    else:
+        print("No se encontraron coincidencias")
+
+    
+
+
 def clasificar_cursada(alumnos, nota_aprobacion=40, nota_promocion=80):
     promocionados = []
     aprobados = []
@@ -55,7 +99,8 @@ def mostrar_menu_principal():
     print("\n--- Menú Principal ---")
     print("1. Parcial")
     print("2. Cursada")
-    print("3. Salir")
+    print("3. Alumno")
+    print("4. Salir")
 
 def mostrar_menu_parcial():
     print("\n--- Parcial ---")
@@ -127,9 +172,9 @@ def main():
     continuar = True
     while continuar:
         mostrar_menu_principal()
-        opcion_principal = input("\nSelecciona una opción (1, 2, 3 para salir): ").lower()
+        opcion_principal = input("\nSelecciona una opción (1, 2, 3, 4 para salir): ").lower()
 
-        if opcion_principal == '3':
+        if opcion_principal == '4':
             print("Saliendo del programa.")
             continuar = False
         elif opcion_principal == '1':
@@ -140,6 +185,8 @@ def main():
             mostrar_menu_cursada()
             opcion_cursada = input("Selecciona una opción (1, 2, 3): ").lower()
             ejecutar_opcion_cursada(opcion_cursada, lista_diccionarios)
+        elif opcion_principal == '3':
+            buscar_alumno(lista_diccionarios)
         else:
             print("Opción no válida. Intenta nuevamente.")
 
