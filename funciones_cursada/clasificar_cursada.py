@@ -1,3 +1,5 @@
+from colorama import Fore, Style
+
 def clasificar_cursada(alumnos, nota_aprobacion=40, nota_promocion=80):
     promocionados = []
     aprobados = []
@@ -20,9 +22,9 @@ def clasificar_cursada(alumnos, nota_aprobacion=40, nota_promocion=80):
                 else:
                     aplazados.append((legajo, nombre, apellido, nota1, nota2))
             else:
-                print(f"Error: Una de las notas no es un número válido.")
+                print(Fore.RED + "Error: Una de las notas no es un número válido." + Style.RESET_ALL)
         else:
-            print(f"Error: Faltan las columnas 'nota1' o 'nota2' en los datos.")
+            print(Fore.RED + "Error: Faltan las columnas 'nota1' o 'nota2' en los datos." + Style.RESET_ALL)
 
     return promocionados, aprobados, aplazados
 
@@ -30,16 +32,16 @@ def ejecutar_opcion_cursada(opcion_cursada, lista_diccionarios):
     promocionados, aprobados, aplazados = clasificar_cursada(lista_diccionarios)
 
     if opcion_cursada == '1':
-        print("\n--- Promocionados ---")
+        print(Fore.YELLOW + "\n--- Promocionados ---" + Style.RESET_ALL)
         for alumno in promocionados:
-            print(f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}")
+            print(Fore.MAGENTA + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
     elif opcion_cursada == '2':
-        print("\n--- Aprobados ---")
+        print(Fore.YELLOW + "\n--- Aprobados ---" + Style.RESET_ALL)
         for alumno in aprobados:
-            print(f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}")
+            print(Fore.MAGENTA + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
     elif opcion_cursada == '3':
-        print("\n--- Aplazados ---")
+        print(Fore.YELLOW + "\n--- Aplazados ---" + Style.RESET_ALL)
         for alumno in aplazados:
-            print(f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}")
+            print(Fore.MAGENTA + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
     else:
-        print("Opción no válida. Intenta nuevamente.")
+        print(Fore.RED + "Opción no válida. Intenta nuevamente." + Style.RESET_ALL)
