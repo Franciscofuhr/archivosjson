@@ -1,6 +1,6 @@
 import csv
 import colorama
-from colorama import Fore, Style
+from colorama import Fore, Back, Style
 from funciones_parcial.buscar_resultados_parcial import ejecutar_opcion_parcial
 from funciones_alumnos.buscar_alumnos import buscar_alumno
 from funciones_cursada.clasificar_cursada import ejecutar_opcion_cursada
@@ -10,17 +10,23 @@ colorama.init(autoreset=True)
 
 
 def mostrar_menu_principal():
-    print(f"\n{Fore.YELLOW}--- Menú Principal ---")
-    print(f"{Fore.CYAN}1. {Fore.RESET}Parcial")
-    print(f"{Fore.CYAN}2. {Fore.RESET}Cursada")
-    print(f"{Fore.CYAN}3. {Fore.RESET}Alumno")
-    print(f"{Fore.CYAN}4. {Fore.RESET}Salir")
+    print(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}--- Programa de Notas Estudiantiles---")
+    print(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}--- Menú Principal ---")
+    print()
+    print(f"{Fore.BLUE}1. {Fore.WHITE}Notas de Parciales")
+    print(f"{Fore.BLUE}2. {Fore.WHITE}Estado de Cursada")
+    print(f"{Fore.BLUE}3. {Fore.WHITE}Busqueda de Alumnos")
+    print(f"{Fore.BLUE}4. {Fore.WHITE}Salir del programa")
 
 
 def mostrar_menu_parcial():
-    print(f"\n{Fore.YELLOW}--- Parcial ---")
-    print(f"{Fore.CYAN}1. {Fore.RESET}1er Parcial")
-    print(f"{Fore.CYAN}2. {Fore.RESET}2do Parcial")
+    print(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}--- Notas de Parciales ---")
+    print(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}--- Seleccione un parcial ---")
+    print()
+    print(f"{Fore.BLUE}1. {Fore.RESET}1er Parcial")
+    print(f"{Fore.BLUE}2. {Fore.RESET}2do Parcial")
+    print(f"{Fore.BLUE}3. {Fore.RESET}Volver al menu principal")
+    print()
 
 
 def main():
@@ -31,14 +37,14 @@ def main():
     continuar = True
     while continuar:
         mostrar_menu_principal()
-        opcion_principal = input(f"\n{Fore.GREEN}Selecciona una opción (1, 2, 3, 4 para salir): {Fore.RESET}").lower()
+        opcion_principal = input(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}Selecciona una opción: {Fore.RESET + Back.RESET}").lower()
 
         if opcion_principal == '4':
-            print(f"{Fore.RED}Saliendo del programa.")
+            print(f"{Fore.RED + Back.RESET}Saliendo del programa.")
             continuar = False
         elif opcion_principal == '1':
             mostrar_menu_parcial()
-            opcion_parcial = input(f"{Fore.GREEN}Selecciona una opción (1, 2): {Fore.RESET}").lower()
+            opcion_parcial = input(f"{Back.WHITE + Fore.BLUE + Style.BRIGHT}Selecciona una opción (1, 2 o 3): {Fore.RESET + Back.RESET}").lower()
             ejecutar_opcion_parcial(opcion_parcial, lista_diccionarios)
         elif opcion_principal == '2':
             ejecutar_opcion_cursada(lista_diccionarios)

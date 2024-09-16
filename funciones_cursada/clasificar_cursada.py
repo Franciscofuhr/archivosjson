@@ -1,5 +1,5 @@
 from variables_globales import NOTA_APROBACION, NOTA_PROMOCION
-from colorama import Fore, Style
+from colorama import Fore, Back, Style
 
 
 def clasificar_cursada(alumnos, nota_aprobacion, nota_promocion):
@@ -35,34 +35,35 @@ def ejecutar_opcion_cursada(lista_diccionarios):
     promocionados, aprobados, aplazados = clasificar_cursada(lista_diccionarios, NOTA_APROBACION, NOTA_PROMOCION)
     bandera = True
     while bandera:
-        print(f"\n{Fore.YELLOW}--- Cursada ---")
+        print(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}--- Cursada ---{Back.RESET}\n")
         print(f"{Fore.CYAN}1. {Fore.RESET}Ver Promocionados")
         print(f"{Fore.CYAN}2. {Fore.RESET}Ver Aprobados")
         print(f"{Fore.CYAN}3. {Fore.RESET}Ver Aplazados")
         print(f"{Fore.CYAN}4. {Fore.RESET}Volver al menú principal")
+        print()
 
-        opcion_cursada = input(f"{Fore.GREEN}Selecciona una opción (1, 2, 3, 4 para salir): ").lower()
+        opcion_cursada = input(f"{Back.WHITE + Fore.BLUE + Style.BRIGHT}Selecciona una opción (1, 2, 3, 4 para salir): {Back.RESET}").lower()
 
         if opcion_cursada == '1':
-            print(f"\n{Fore.YELLOW}--- Promocionados ---")
+            print(f"\n{Fore.GREEN + Style.BRIGHT}--- Promocionados ---\n")
             for alumno in promocionados:
-                print(Fore.MAGENTA + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
+                print(Fore.GREEN + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
             if len(promocionados) == 0:
                 print(f"\n{Fore.RED}No hay alumnos promocionados.")
         elif opcion_cursada == '2':
-            print(f"\n{Fore.YELLOW}--- Aprobados ---")
+            print(f"\n{Fore.YELLOW + Style.BRIGHT}--- Aprobados ---\n")
             for alumno in aprobados:
-                print(Fore.MAGENTA + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
+                print(Fore.YELLOW + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
             if len(aprobados) == 0:
-                print(f"\n{Fore.RED}No hay alumnos aprobados.")
+                print(f"\n{Back.RED + Fore.WHITE}No hay alumnos aprobados.")
         elif opcion_cursada == '3':
-            print(f"\n{Fore.YELLOW}--- Aplazados ---")
+            print(f"\n{Fore.RED + Style.BRIGHT}--- Aplazados ---\n")
             for alumno in aplazados:
-                print(Fore.MAGENTA + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
+                print(Fore.RED + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
             if len(aplazados) == 0:
                 print(f"\n{Fore.RED}No hay alumnos aplazados.")
         elif opcion_cursada == '4':
-            print(f"\n{Fore.YELLOW}--- Volviendo al menú principal... ---")
+            print(f"\n{Fore.RED + Style.BRIGHT}--- Volviendo al menú principal... ---")
             bandera = False
         else:
             print(f"\n{Fore.RED}Opción no válida. Intenta nuevamente.")
