@@ -30,6 +30,7 @@ def clasificar_cursada(alumnos, nota_aprobacion, nota_promocion):
 
     return promocionados, aprobados, aplazados
 
+
 def ejecutar_opcion_cursada(lista_diccionarios):
     promocionados, aprobados, aplazados = clasificar_cursada(lista_diccionarios, NOTA_APROBACION, NOTA_PROMOCION)
     bandera = True
@@ -39,7 +40,7 @@ def ejecutar_opcion_cursada(lista_diccionarios):
         print(f"{Fore.CYAN}2. {Fore.RESET}Ver Aprobados")
         print(f"{Fore.CYAN}3. {Fore.RESET}Ver Aplazados")
         print(f"{Fore.CYAN}4. {Fore.RESET}Volver al menú principal")
-        
+
         opcion_cursada = input(f"{Fore.GREEN}Selecciona una opción (1, 2, 3, 4 para salir): ").lower()
 
         if opcion_cursada == '1':
@@ -62,6 +63,6 @@ def ejecutar_opcion_cursada(lista_diccionarios):
                 print(f"\n{Fore.RED}No hay alumnos aplazados.")
         elif opcion_cursada == '4':
             print(f"\n{Fore.YELLOW}--- Volviendo al menú principal... ---")
-            bandera = False 
+            bandera = False
         else:
             print(f"\n{Fore.RED}Opción no válida. Intenta nuevamente.")

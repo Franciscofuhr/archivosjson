@@ -1,5 +1,6 @@
 from colorama import Fore, Style
 
+
 def buscar_alumno(lista_diccionarios):
     bandera_principal = True
 
@@ -14,41 +15,42 @@ def buscar_alumno(lista_diccionarios):
             print(f"{Fore.YELLOW}Volviendo al menú principal...{Style.RESET_ALL}")
             bandera_principal = False
             continue
-        
+
         resultado = None
         bandera_busqueda = True
-        
+
         while bandera_busqueda:
             if opcion == '1':
                 id_alumno = input(f"{Fore.CYAN}Introduce el ID del alumno o -1 para regresar al menú de búsqueda: ")
                 if id_alumno == '-1':
                     print(f"{Fore.YELLOW}Volviendo al menú de búsqueda...")
                     bandera_busqueda = False
-                    continue  
+                    continue
+
                 for persona in lista_diccionarios:
                     if persona['Legajo'] == id_alumno:
                         resultado = persona
-            
+
             elif opcion == '2':
                 nombre = input(f"{Fore.CYAN}Introduce el nombre del alumno o -1 para regresar al menú de búsqueda: ")
                 if nombre == '-1':
                     print(f"{Fore.YELLOW}Volviendo al menú de búsqueda...")
                     bandera_busqueda = False
-                    continue  
+                    continue
                 for persona in lista_diccionarios:
                     if persona['Nombre'] == nombre:
                         resultado = persona
-            
+
             elif opcion == '3':
                 apellido = input(f"{Fore.CYAN}Introduce el apellido del alumno o -1 para regresar al menú de búsqueda: ")
                 if apellido == '-1':
                     print(f"{Fore.YELLOW}Volviendo al menú de búsqueda...")
                     bandera_busqueda = False
-                    continue  
+                    continue
                 for persona in lista_diccionarios:
                     if persona['Apellido'] == apellido:
                         resultado = persona
-            
+
             else:
                 print(f"{Fore.YELLOW}Opción no válida.")
                 bandera_busqueda = False
@@ -61,4 +63,3 @@ def buscar_alumno(lista_diccionarios):
                 print(f"{Fore.RED}No se encontraron coincidencias")
             resultado = None
             print("")
-
