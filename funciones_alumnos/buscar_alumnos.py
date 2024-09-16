@@ -15,7 +15,7 @@ def buscar_alumno(lista_diccionarios):
             bandera_principal = False
             continue
         
-        resultado = []
+        resultado = None
         bandera_busqueda = True
         
         while bandera_busqueda:
@@ -27,7 +27,7 @@ def buscar_alumno(lista_diccionarios):
                     continue  
                 for persona in lista_diccionarios:
                     if persona['Legajo'] == id_alumno:
-                        resultado.append(persona)
+                        resultado = persona
             
             elif opcion == '2':
                 nombre = input(f"{Fore.CYAN}Introduce el nombre del alumno o -1 para regresar al menú de búsqueda: ")
@@ -37,7 +37,7 @@ def buscar_alumno(lista_diccionarios):
                     continue  
                 for persona in lista_diccionarios:
                     if persona['Nombre'] == nombre:
-                        resultado.append(persona)
+                        resultado = persona
             
             elif opcion == '3':
                 apellido = input(f"{Fore.CYAN}Introduce el apellido del alumno o -1 para regresar al menú de búsqueda: ")
@@ -47,7 +47,7 @@ def buscar_alumno(lista_diccionarios):
                     continue  
                 for persona in lista_diccionarios:
                     if persona['Apellido'] == apellido:
-                        resultado.append(persona)
+                        resultado = persona
             
             else:
                 print(f"{Fore.YELLOW}Opción no válida.")
@@ -56,9 +56,9 @@ def buscar_alumno(lista_diccionarios):
 
             # Imprimir resultado de la búsqueda
             if resultado:
-                for persona in resultado:
-                    print(f"{Fore.MAGENTA}Legajo: {persona['Legajo']}, {persona['Nombre']} {persona['Apellido']}: 1er Parcial: {persona['nota1']} / 2do Parcial: {persona['nota2']}")
+                print(f"{Fore.MAGENTA}Legajo: {resultado['Legajo']}, {resultado['Nombre']} {resultado['Apellido']}: 1er Parcial: {resultado['nota1']} / 2do Parcial: {resultado['nota2']}")
             else:
                 print(f"{Fore.RED}No se encontraron coincidencias")
+            resultado = None
             print("")
 
