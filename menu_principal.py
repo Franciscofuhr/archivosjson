@@ -14,7 +14,7 @@ def mostrar_menu_parcial():
     print("\n--- Parcial ---")
     print("1. 1er Parcial")
     print("2. 2do Parcial")
-
+    
 
 def mostrar_menu_cursada():
     print("\n--- Cursada ---")
@@ -23,7 +23,7 @@ def mostrar_menu_cursada():
     print("3. Aplazado")
 
 def main():
-    with open('archivosjson\datosAlumnos.csv', mode='r') as archivo_csv:
+    with open('datosAlumnos.csv', mode='r') as archivo_csv:
         lector_csv = csv.DictReader(archivo_csv, delimiter=';')
         print("Encabezados del CSV:", lector_csv.fieldnames)  # Imprime los nombres de las columnas
         lista_diccionarios = [fila for fila in lector_csv]
@@ -42,8 +42,7 @@ def main():
             ejecutar_opcion_parcial(opcion_parcial, lista_diccionarios)
         elif opcion_principal == '2':
             mostrar_menu_cursada()
-            opcion_cursada = input("Selecciona una opción (1, 2, 3): ").lower()
-            ejecutar_opcion_cursada(opcion_cursada, lista_diccionarios)
+            ejecutar_opcion_cursada( lista_diccionarios)
         elif opcion_principal == '3':
             buscar_alumno(lista_diccionarios)
         else:
