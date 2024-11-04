@@ -1,54 +1,132 @@
 import csv
-import colorama
-from colorama import Fore, Back, Style
+import customtkinter as ctk
 from funciones_parcial.buscar_resultados_parcial import ejecutar_opcion_parcial
 from funciones_alumnos.buscar_alumnos import buscar_alumno
 from funciones_cursada.clasificar_cursada import ejecutar_opcion_cursada
+from PIL import Image
 
-# Inicializar colorama con auto-reset para no acumular estilos
-colorama.init(autoreset=True)
+class App(ctk.CTk):
+    def __init__(self):
+        super().__init__()
 
+        self.title("Programa de Notas Estudiantiles")
+        self.geometry("800x600")
+        self._set_appearance_mode("system")
+        self.configure(fg_color="#061b2c")
 
-def mostrar_menu_principal():
-    print(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}--- Programa de Notas Estudiantiles---")
-    print(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}--- Menú Principal ---")
-    print()
-    print(f"{Fore.BLUE}1. {Fore.WHITE}Notas de Parciales")
-    print(f"{Fore.BLUE}2. {Fore.WHITE}Estado de Cursada")
-    print(f"{Fore.BLUE}3. {Fore.WHITE}Busqueda de Alumnos")
-    print(f"{Fore.BLUE}4. {Fore.WHITE}Salir del programa")
+        # Cargar los datos al iniciar
+        self.lista_diccionarios = self.cargar_datos()
 
+        # Cargar la imagen y almacenar en un atributo
+        try:
+            self.my_image = ctk.CTkImage(light_image=Image.open("C:\\Users\\matyb\\OneDrive\\Escritorio\\uade_una_gran_universidad.png"),
+                                         size=(400, 240))
+        except Exception as e:
+            print(f"Error al cargar la imagen: {e}")
+            self.my_image = None  # Asignar None si hay un error
 
-def mostrar_menu_parcial():
-    print(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}--- Notas de Parciales ---")
-    print(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}--- Seleccione un parcial ---")
-    print()
-    print(f"{Fore.BLUE}1. {Fore.RESET}1er Parcial")
-    print(f"{Fore.BLUE}2. {Fore.RESET}2do Parcial")
-    print(f"{Fore.BLUE}3. {Fore.RESET}Volver al menu principal")
-    print()
+        # Crear un Frame para mostrar los diferentes menús
+        self.frame_principal = ctk.CTkFrame(self)
+        self.frame_principal.pack(pady=10, padx=10, fill="both", expand=True)
+        self.frame_principal._set_appearance_mode("system")
+        self.frame_principal.configure(fg_color="White")
+        
+        self.mostrar_menu_principal()
+
+    def cargar_datos(self):
+        with open('archivosjson\\datosAlumnos.csv', mode='r') as archivo_csv:
+            lector_csv = csv.DictReader(archivo_csv, delimiter=';')
+            return [fila for fila in lector_csv]
+
+    def mostrar_menu_principal(self):
+        self.limpiar_frame()
+        
+        # Mostrar la imagen
+        if self.my_image: 
+            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  
+        else:
+            ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
+
+        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+        ctk.CTkLabel(self.frame_principal, text="Menú Principal", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
+
+        boton_notas_parciales = ctk.CTkButton(self.frame_principal, text="Notas de Parciales", fg_color="#061b2c", width=200, command=self.mostrar_menu_parcial)
+        boton_notas_parciales.pack(pady=5)
+
+        boton_estado_cursada = ctk.CTkButton(self.frame_principal, text="Estado de Cursada", fg_color="#061b2c", width=200, command=self.ejecutar_estado_cursada)
+        boton_estado_cursada.pack(pady=5)
+
+        boton_busqueda_alumnos = ctk.CTkButton(self.frame_principal, text="Búsqueda de Alumnos", fg_color="#061b2c", width=200, command=self.buscar_alumnos)
+        boton_busqueda_alumnos.pack(pady=5)
+
+        boton_salir = ctk.CTkButton(self.frame_principal, text="Salir", fg_color="#061b2c", width=150, command=self.quit)
+        boton_salir.pack(pady=10)
+
+    def mostrar_menu_parcial(self):
+        self.limpiar_frame()  # Limpiar el contenido del frame actual
+
+        if self.my_image:
+            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  # Mostrar la imagen
+        else:
+            ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
+        
+        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+        ctk.CTkLabel(self.frame_principal, text="Notas de Parciales", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
+
+        boton_1er_parcial = ctk.CTkButton(self.frame_principal, text="1er Parcial", fg_color="#061b2c", width=200, command=lambda: self.ejecutar_opcion_parcial("1"))
+        boton_1er_parcial.pack(pady=5)
+
+        boton_2do_parcial = ctk.CTkButton(self.frame_principal, text="2do Parcial", fg_color="#061b2c", width=200, command=lambda: self.ejecutar_opcion_parcial("2"))
+        boton_2do_parcial.pack(pady=5)
+
+        boton_volver = ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal)
+        boton_volver.pack(pady=10)
+
+    def ejecutar_opcion_parcial(self, opcion_parcial):
+        self.limpiar_frame()  # Limpiar el contenido del frame actual
+        
+        if self.my_image:
+            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  # Mostrar la imagen
+        else:
+            ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
+
+        ejecutar_opcion_parcial(opcion_parcial, self.lista_diccionarios, self.frame_principal)  # Mostrar el resultado en un frame
+        
+        
+        boton_volver = ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal) 
+        boton_volver.pack(pady=5)  # Agregar un botón "Volver" para regresar al menú principal
+
+    def ejecutar_estado_cursada(self):
+        self.limpiar_frame()
+        if self.my_image:
+            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  # Mostrar la imagen
+        else:
+            ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
+            
+        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+
+        ejecutar_opcion_cursada(self.lista_diccionarios, self.frame_principal)  # Pasar el frame_principal
+
+    def buscar_alumnos(self):
+        self.limpiar_frame()
+        if self.my_image:
+            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  # Mostrar la imagen
+        else:
+            ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
+            
+        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+
+        buscar_alumno(self.lista_diccionarios, self.frame_principal)
+
+    def limpiar_frame(self):
+        for widget in self.frame_principal.winfo_children(): # Limpiar el contenido del frame actual
+            widget.destroy()
 
 
 def main():
-    with open('archivosjson\\datosAlumnos.csv', mode='r') as archivo_csv:
-        lector_csv = csv.DictReader(archivo_csv, delimiter=';')
-        lista_diccionarios = [fila for fila in lector_csv]
+    app = App()
+    app.mainloop()
 
-    continuar = True
-    while continuar:
-        mostrar_menu_principal()
-        opcion_principal = input(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}Selecciona una opción: {Fore.RESET + Back.RESET}").lower()
 
-        if opcion_principal == '4':
-            print(f"{Fore.RED + Back.RESET}Saliendo del programa.")
-            continuar = False
-        elif opcion_principal == '1':
-            mostrar_menu_parcial()
-            opcion_parcial = input(f"{Back.WHITE + Fore.BLUE + Style.BRIGHT}Selecciona una opción (1, 2 o 3): {Fore.RESET + Back.RESET}").lower()
-            ejecutar_opcion_parcial(opcion_parcial, lista_diccionarios)
-        elif opcion_principal == '2':
-            ejecutar_opcion_cursada(lista_diccionarios)
-        elif opcion_principal == '3':
-            buscar_alumno(lista_diccionarios)
-        else:
-            print(f"{Fore.RED}Opción no válida. Intenta nuevamente.")
+if __name__ == "__main__":
+    main()
