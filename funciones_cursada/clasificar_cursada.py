@@ -17,6 +17,9 @@ def clasificar_cursada(alumnos, nota_aprobacion, nota_promocion):
             if nota1.isdigit() and nota2.isdigit():
                 nota1 = int(nota1)
                 nota2 = int(nota2)
+                if not (0 <= nota1 <= 100) or not (0 <= nota2 <= 100):
+                    print(Fore.RED + "Error: Las notas deben estar en el rango de 0 a 100." + Style.RESET_ALL)
+                    continue
                 if nota1 >= nota_promocion and nota2 >= nota_promocion:
                     promocionados.append((legajo, nombre, apellido, nota1, nota2))
                 elif nota1 >= nota_aprobacion and nota2 >= nota_aprobacion:

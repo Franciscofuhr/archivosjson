@@ -100,3 +100,29 @@ def test_desaprobados_parcial2(opcion_parcial2,lista_diccionarios):
             ejecutar_opcion_parcial(opcion_parcial2,lista_diccionarios)
             assert "Legajo: 1, Juan Martinez: 30" in salida_simulada.getvalue()
             assert "Legajo: 7, Maria Fernandez: 22" in salida_simulada.getvalue()
+
+def test_sin_aprobados_parcial1(opcion_parcial1):
+
+    lista = [{"Legajo": "1", "Nombre": "Luis", "Apellido": "Gomez", "nota1": "10", "nota2": "20"}]
+    inputs = ['1', '3', '4']
+    with patch('builtins.input', side_effect=inputs):
+        with patch('sys.stdout', new=StringIO()) as salida_simulada:
+            ejecutar_opcion_parcial(opcion_parcial1, lista)
+            assert "No hay alumnos aprobados" in salida_simulada.getvalue()
+            
+def test_sin_desaprobados(opcion_parcial1):
+
+    lista = [{"Legajo": "1", "Nombre": "Luis", "Apellido": "Gomez", "nota1": "10", "nota2": "20"}]
+    inputs = ['1', '3', '4']
+    with patch('builtins.input', side_effect=inputs):
+        with patch('sys.stdout', new=StringIO()) as salida_simulada:
+            ejecutar_opcion_parcial(opcion_parcial1, lista)
+            assert "No hay alumnos aprobados" in salida_simulada.getvalue()
+
+def test_entrada_invalida(opcion_parcial1, lista_diccionarios):
+    inputs = ['x', '1', '3', '4']  # 'x' es una entrada inválida
+    with patch('builtins.input', side_effect=inputs):
+        with patch('sys.stdout', new=StringIO()) as salida_simulada:
+            ejecutar_opcion_parcial(opcion_parcial1, lista_diccionarios)
+            salida = salida_simulada.getvalue()
+            assert "Opción no válida" in salida

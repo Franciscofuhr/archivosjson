@@ -86,7 +86,6 @@ def test_clasificar_aplazados(lista_diccionarios):
             assert "Gonzalo Moreno" in salida_simulada.getvalue()
 
 def test_faltan_notas(lista_diccionarios):
-    # Entradas para verificar alumnos con datos faltantes
     alumnos_faltan_notas = [
         {'Legajo': 9, 'Nombre': 'Elena', 'Apellido': 'Hernandez', 'nota1': '78'},  # Falta nota2
         {'Legajo': 10, 'Nombre': 'Laura', 'Apellido': 'Ruiz', 'nota2': '91'},  # Falta nota1
@@ -96,5 +95,31 @@ def test_faltan_notas(lista_diccionarios):
         with patch('sys.stdout', new=StringIO()) as salida_simulada:
             clasificar_cursada(alumnos_faltan_notas,NOTA_APROBACION,NOTA_PROMOCION)
             assert "Error: Faltan las columnas 'nota1' o 'nota2' en los datos." in salida_simulada.getvalue()
+
+def test_limites_aprobacion_y_promocion(lista_diccionarios):
+    lista_diccionarios = [{"Legajo": "52", "Nombre": "Tomás", "Apellido": "Gomez", "nota1": "80", "nota2": "80"}]
+    inputs = ['1', '4', '4'] 
+    with patch('builtins.input', side_effect=inputs):
+        with patch('sys.stdout', new=StringIO()) as salida_simulada:
+            ejecutar_opcion_cursada(lista_diccionarios)
+            assert "Tomás Gomez" in salida_simulada.getvalue()
+
+def test_datos_no_numericos(lista_diccionarios):
+    lista_diccionarios= [{"Legajo": "53", "Nombre": "Nina", "Apellido": "Rojas", "nota1": "no_num", "nota2": "45"}]
+    inputs = ['1', '4', '4']  
+    with patch('builtins.input', side_effect=inputs):
+        with patch('sys.stdout', new=StringIO()) as salida_simulada:
+            clasificar_cursada(lista_diccionarios, NOTA_APROBACION, NOTA_PROMOCION)
+            assert "Error: Una de las notas no es un número válido." in salida_simulada.getvalue()
+
+def test_notas_fuera_de_rango(lista_diccionarios):
+    lista_diccionarios= [{"Legajo": "54", "Nombre": "Oscar", "Apellido": "Perez", "nota1": "105", "nota2": "50"}]
+    inputs = ['1', '4', '4']  # Selección de opción no relevante para el error
+    with patch('builtins.input', side_effect=inputs):
+        with patch('sys.stdout', new=StringIO()) as salida_simulada:
+            clasificar_cursada(lista_diccionarios, NOTA_APROBACION, NOTA_PROMOCION)
+            assert "Error: Las notas deben estar en el rango de 0 a 100." in salida_simulada.getvalue()
+            
+
 
 

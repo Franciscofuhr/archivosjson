@@ -101,3 +101,20 @@ def test_buscar_alumno_no_existe(lista_diccionarios):
         with patch('sys.stdout', new=StringIO()) as salida_simulada:
             buscar_alumno(lista_diccionarios)
             assert "No se encontraron coincidencias" in salida_simulada.getvalue()
+
+
+def test_buscar_alumno_datos_vacios(lista_diccionarios):
+    inputs = ['2', '', '-1', '4']
+    with patch('builtins.input', side_effect=inputs):
+        with patch('sys.stdout', new=StringIO()) as salida_simulada:
+            buscar_alumno(lista_diccionarios)
+            assert "No se encontraron coincidencias" in salida_simulada.getvalue()
+
+
+def test_buscar_alumno_nombre_mixto_mayus_minus(lista_diccionarios):
+    inputs = ['2', 'jUaN', '-1', '4']
+    with patch('builtins.input', side_effect=inputs):
+        with patch('sys.stdout', new=StringIO()) as salida_simulada:
+            buscar_alumno(lista_diccionarios)
+            assert "Juan Martinez" in salida_simulada.getvalue()
+
