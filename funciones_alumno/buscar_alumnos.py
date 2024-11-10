@@ -1,6 +1,5 @@
 from colorama import Fore, Back, Style
 
-
 def buscar_alumno(lista_diccionarios):
     bandera_principal = True
 
@@ -39,7 +38,7 @@ def buscar_alumno(lista_diccionarios):
                     bandera_busqueda = False
                     continue
                 for persona in lista_diccionarios:
-                    if persona['Nombre'].lower() == nombre:
+                    if persona['Nombre'].lower() == nombre.lower():
                         resultado = persona
 
             elif opcion == '3':
@@ -49,7 +48,7 @@ def buscar_alumno(lista_diccionarios):
                     bandera_busqueda = False
                     continue
                 for persona in lista_diccionarios:
-                    if persona['Apellido'].lower() == apellido:
+                    if persona['Apellido'].lower() == apellido.lower():
                         resultado = persona
 
             else:

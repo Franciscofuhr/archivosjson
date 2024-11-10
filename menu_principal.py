@@ -2,7 +2,7 @@ import csv
 import colorama
 from colorama import Fore, Back, Style
 from funciones_parcial.buscar_resultados_parcial import ejecutar_opcion_parcial
-from funciones_alumnos.buscar_alumnos import buscar_alumno
+from funciones_alumno.buscar_alumnos import buscar_alumno
 from funciones_cursada.clasificar_cursada import ejecutar_opcion_cursada
 
 # Inicializar colorama con auto-reset para no acumular estilos
@@ -30,7 +30,7 @@ def mostrar_menu_parcial():
 
 
 def main():
-    with open('archivosjson\\datosAlumnos.csv', mode='r') as archivo_csv:
+    with open('D:/archivosjson/datosAlumnos.csv', mode='r') as archivo_csv:
         lector_csv = csv.DictReader(archivo_csv, delimiter=';')
         lista_diccionarios = [fila for fila in lector_csv]
 
