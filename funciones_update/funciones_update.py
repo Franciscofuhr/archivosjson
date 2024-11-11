@@ -2,15 +2,12 @@ import csv
 import os
 
 def modificar_fila_csv(legajo_a_modificar, nuevo_nombre=None, nuevo_apellido=None, nueva_nota1=None, nueva_nota2=None):
-    # Ruta del archivo
     ruta_archivo = 'archivosjson\\datosAlumnos.csv'
     
-    # Verificamos si el archivo existe
     if not os.path.exists(ruta_archivo):
         print("El archivo no existe.")
         return
 
-    # Bandera para verificar si se encontró el legajo
     fila_modificada = False
 
     # Leer todas las filas y modificar la que coincide con el legajo dado
