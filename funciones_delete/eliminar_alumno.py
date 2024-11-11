@@ -30,6 +30,7 @@ def eliminar_fila_csv(legajo_a_eliminar):
         with open(ruta_archivo, mode='w', newline='') as archivo_csv:
             writer = csv.writer(archivo_csv, delimiter=';')
             writer.writerows(filas_restantes)  # Escribimos todas las filas restantes
-        print(f"Registro con legajo {legajo_a_eliminar} eliminado.")
+        return True
     else:
-        print(f"No se encontró ningún registro con legajo {legajo_a_eliminar}.")
+        return False
+        

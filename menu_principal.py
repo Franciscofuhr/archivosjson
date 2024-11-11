@@ -3,6 +3,7 @@ import customtkinter as ctk
 from funciones_parcial.buscar_resultados_parcial import ejecutar_opcion_parcial
 from funciones_alumnos.buscar_alumnos import buscar_alumno
 from funciones_cursada.clasificar_cursada import ejecutar_opcion_cursada
+from funciones_delete.menu_delete import mostrar_menu_delete  # Interfaz de eliminación
 from PIL import Image
 
 class App(ctk.CTk):
@@ -34,128 +35,118 @@ class App(ctk.CTk):
         self.mostrar_menu_principal()
 
     def cargar_datos(self):
+        # Cargar los datos de los alumnos desde el archivo CSV
         with open('archivosjson\\datosAlumnos.csv', mode='r') as archivo_csv:
             lector_csv = csv.DictReader(archivo_csv, delimiter=';')
             return [fila for fila in lector_csv]
 
     def mostrar_menu_principal(self):
+        # Mostrar el menú principal
         self.limpiar_frame()
         
-        # Mostrar la imagen
+        # Mostrar la imagen si se cargó correctamente
         if self.my_image: 
             ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  
         else:
             ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
 
+        # Título del programa
         ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
         ctk.CTkLabel(self.frame_principal, text="Menú Principal", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
-        boton_notas_parciales = ctk.CTkButton(self.frame_principal, text="Notas de Parciales", fg_color="#061b2c", width=200, command=self.mostrar_menu_parcial)
-        boton_notas_parciales.pack(pady=5)
-
-        boton_estado_cursada = ctk.CTkButton(self.frame_principal, text="Estado de Cursada", fg_color="#061b2c", width=200, command=self.ejecutar_estado_cursada)
-        boton_estado_cursada.pack(pady=5)
-
-        # Cambiar aquí de "Búsqueda de Alumnos" a "Alumnos"
-        boton_alumnos = ctk.CTkButton(self.frame_principal, text="Alumnos", fg_color="#061b2c", width=200, command=self.mostrar_submenu_alumnos)
-        boton_alumnos.pack(pady=5)
-
-        boton_salir = ctk.CTkButton(self.frame_principal, text="Salir", fg_color="#061b2c", width=150, command=self.quit)
-        boton_salir.pack(pady=10)
+        # Botones del menú principal
+        ctk.CTkButton(self.frame_principal, text="Notas de Parciales", fg_color="#061b2c", width=200, command=self.mostrar_menu_parcial).pack(pady=5)
+        ctk.CTkButton(self.frame_principal, text="Estado de Cursada", fg_color="#061b2c", width=200, command=self.ejecutar_estado_cursada).pack(pady=5)
+        ctk.CTkButton(self.frame_principal, text="Alumnos", fg_color="#061b2c", width=200, command=self.mostrar_submenu_alumnos).pack(pady=5)
+        ctk.CTkButton(self.frame_principal, text="Salir", fg_color="#061b2c", width=150, command=self.quit).pack(pady=10)
 
     def mostrar_submenu_alumnos(self):
-        self.limpiar_frame()  # Limpiar el contenido del frame actual
+        # Mostrar el submenú de Alumnos
+        self.limpiar_frame()
 
         if self.my_image:
-            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  # Mostrar la imagen
+            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()
         else:
             ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
 
         ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
         ctk.CTkLabel(self.frame_principal, text="Alumnos", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
-        boton_busqueda_alumnos = ctk.CTkButton(self.frame_principal, text="Búsqueda de Alumnos", fg_color="#061b2c", width=200, command=self.buscar_alumnos)
-        boton_busqueda_alumnos.pack(pady=5)
-
-        # Agregar botón para "Crear Alumno"
-        boton_crear_alumno = ctk.CTkButton(self.frame_principal, text="Crear Alumno", fg_color="#061b2c", width=200, command=self.mostrar_menu_crear_alumno)
-        boton_crear_alumno.pack(pady=5)
-
-        boton_volver = ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal)
-        boton_volver.pack(pady=10)
+        # Botones para gestionar alumnos
+        ctk.CTkButton(self.frame_principal, text="Búsqueda de Alumnos", fg_color="#061b2c", width=200, command=self.buscar_alumnos).pack(pady=5)
+        ctk.CTkButton(self.frame_principal, text="Crear Alumno", fg_color="#061b2c", width=200, command=self.mostrar_menu_crear_alumno).pack(pady=5)
+        ctk.CTkButton(self.frame_principal, text="Eliminar Alumno", fg_color="red", width=200, command=lambda: mostrar_menu_delete(self.frame_principal, self)).pack(pady=5)
+        ctk.CTkButton(self.frame_principal, text="Modificar Alumno", fg_color="#061b2c", width=200, command=self.mostrar_menu_modificar_alumno).pack(pady=5)
+        
+        ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal).pack(pady=10)
 
     def mostrar_menu_crear_alumno(self):
-        # Llamar a la función de creación de alumno (debe estar implementada en funciones_alumnos/menu_crear.py)
+        # Mostrar el menú de creación de alumno
         from funciones_create.menu_crear import mostrar_menu_crear
         mostrar_menu_crear(self.frame_principal)
 
+    def mostrar_menu_modificar_alumno(self):
+        # Mostrar el menú de modificación de alumno
+        from funciones_update.menu_update import mostrar_menu_update
+        self.limpiar_frame()
+        mostrar_menu_update(self.frame_principal, self)
+
     def mostrar_menu_parcial(self):
-        self.limpiar_frame()  # Limpiar el contenido del frame actual
+        # Mostrar el menú de Notas de Parciales
+        self.limpiar_frame()
 
         if self.my_image:
-            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  # Mostrar la imagen
+            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()
         else:
             ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
         
         ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
         ctk.CTkLabel(self.frame_principal, text="Notas de Parciales", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
-        boton_1er_parcial = ctk.CTkButton(self.frame_principal, text="1er Parcial", fg_color="#061b2c", width=200, command=lambda: self.ejecutar_opcion_parcial("1"))
-        boton_1er_parcial.pack(pady=5)
-
-        boton_2do_parcial = ctk.CTkButton(self.frame_principal, text="2do Parcial", fg_color="#061b2c", width=200, command=lambda: self.ejecutar_opcion_parcial("2"))
-        boton_2do_parcial.pack(pady=5)
-
-        boton_volver = ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal)
-        boton_volver.pack(pady=10)
+        ctk.CTkButton(self.frame_principal, text="1er Parcial", fg_color="#061b2c", width=200, command=lambda: self.ejecutar_opcion_parcial("1")).pack(pady=5)
+        ctk.CTkButton(self.frame_principal, text="2do Parcial", fg_color="#061b2c", width=200, command=lambda: self.ejecutar_opcion_parcial("2")).pack(pady=5)
+        ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal).pack(pady=10)
 
     def ejecutar_opcion_parcial(self, opcion_parcial):
-        self.limpiar_frame()  # Limpiar el contenido del frame actual
+        # Ejecutar una opción de notas de parciales
+        self.limpiar_frame()
         
         if self.my_image:
-            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  # Mostrar la imagen
+            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()
         else:
             ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
 
-        ejecutar_opcion_parcial(opcion_parcial, self.lista_diccionarios, self.frame_principal)  # Mostrar el resultado en un frame
-        
-        boton_volver = ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal) 
-        boton_volver.pack(pady=5)  # Agregar un botón "Volver" para regresar al menú principal
+        ejecutar_opcion_parcial(opcion_parcial, self.lista_diccionarios, self.frame_principal)
+        ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal).pack(pady=5)
 
     def ejecutar_estado_cursada(self):
+        # Ejecutar el estado de cursada
         self.limpiar_frame()
         if self.my_image:
-            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  # Mostrar la imagen
+            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()
         else:
             ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
             
         ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
-
-        ejecutar_opcion_cursada(self.lista_diccionarios, self.frame_principal)  # Pasar el frame_principal
+        ejecutar_opcion_cursada(self.lista_diccionarios, self.frame_principal)
 
     def buscar_alumnos(self):
+        # Buscar alumnos en el archivo CSV
         self.limpiar_frame()
         if self.my_image:
-            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  # Mostrar la imagen
+            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()
         else:
             ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
             
         ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
-
-        # Buscar alumnos en el archivo CSV
         buscar_alumno(self.lista_diccionarios, self.frame_principal)
-        
-        boton_volver = ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal)
-        boton_volver.pack(pady=5)
 
     def limpiar_frame(self):
+        # Limpiar el contenido del frame actual
         for widget in self.frame_principal.winfo_children():
             widget.destroy()
 
-# Ejecución de la aplicación
-def main():
+# Crear la instancia y ejecutar la aplicación
+if __name__ == "__main__":
     app = App()
     app.mainloop()
-
-if __name__ == "__main__":
-    main()
