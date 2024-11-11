@@ -3,7 +3,7 @@ import os
 
 def eliminar_fila_csv(legajo_a_eliminar):
     # Ruta del archivo
-    ruta_archivo = 'archivosjson-master\\archivosjson-master\\datosAlumnos.csv'
+    ruta_archivo = 'archivosjson\\datosAlumnos.csv'
     
     # Verificamos si el archivo existe
     if not os.path.exists(ruta_archivo):
@@ -33,6 +33,3 @@ def eliminar_fila_csv(legajo_a_eliminar):
         print(f"Registro con legajo {legajo_a_eliminar} eliminado.")
     else:
         print(f"No se encontró ningún registro con legajo {legajo_a_eliminar}.")
-
-# Ejemplo de uso
-eliminar_fila_csv(243 )

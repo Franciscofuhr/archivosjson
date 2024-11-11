@@ -3,7 +3,7 @@ import os
 
 def modificar_fila_csv(legajo_a_modificar, nuevo_nombre=None, nuevo_apellido=None, nueva_nota1=None, nueva_nota2=None):
     # Ruta del archivo
-    ruta_archivo = 'archivosjson-master\\archivosjson-master\\datosAlumnos.csv'
+    ruta_archivo = 'archivosjson\\datosAlumnos.csv'
     
     # Verificamos si el archivo existe
     if not os.path.exists(ruta_archivo):
@@ -39,4 +39,4 @@ def modificar_fila_csv(legajo_a_modificar, nuevo_nombre=None, nuevo_apellido=Non
         print(f"No se encontró ningún registro con legajo {legajo_a_modificar}.")
 
 # Ejemplo de uso
-modificar_fila_csv(243, nuevo_nombre='Luis', nueva_nota1=85)
+#modificar_fila_csv(243, nuevo_nombre='Luis', nueva_nota1=85)

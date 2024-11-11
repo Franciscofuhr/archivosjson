@@ -32,7 +32,7 @@ def mostrar_resultados(frame_principal, lista, tipo):
         widget.destroy()
         
     try:
-        image = ctk.CTkImage(light_image=Image.open("C:\\Users\\matyb\\OneDrive\\Escritorio\\uade_una_gran_universidad.png"),
+        image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
                                          size=(200, 120))
     except Exception as e:
         print(f"Error al cargar la imagen: {e}")
@@ -69,7 +69,7 @@ def mostrar_menu_cursada(frame, lista_diccionarios):
         widget.destroy()
         
     try:
-        image = ctk.CTkImage(light_image=Image.open("C:\\Users\\matyb\\OneDrive\\Escritorio\\uade_una_gran_universidad.png"),
+        image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
                                          size=(400, 240))
     except Exception as e:
         print(f"Error al cargar la imagen: {e}")

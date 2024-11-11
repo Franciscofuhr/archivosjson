@@ -12,7 +12,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             widget.destroy()
             
         try:
-            image = ctk.CTkImage(light_image=Image.open("C:\\Users\\matyb\\OneDrive\\Escritorio\\uade_una_gran_universidad.png"),
+            image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
                                          size=(200, 120))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
@@ -35,11 +35,12 @@ def buscar_alumno(lista_diccionarios, frame_principal):
         boton_volver.pack(pady=10)
 
     def buscar_por_criterio(criterio):
+        # Limpiar el frame antes de mostrar el formulario de búsqueda
         for widget in frame_principal.winfo_children():
             widget.destroy()
             
         try:
-            image = ctk.CTkImage(light_image=Image.open("C:\\Users\\matyb\\OneDrive\\Escritorio\\uade_una_gran_universidad.png"),
+            image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
                                          size=(400, 240))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
@@ -59,18 +60,13 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             valor = entry.get().lower()
             resultado = None
 
-            if criterio == 'ID':
-                for persona in lista_diccionarios:
-                    if persona['Legajo'] == valor:
-                        resultado = persona
-            elif criterio == 'Nombre':
-                for persona in lista_diccionarios:
-                    if persona['Nombre'].lower() == valor:
-                        resultado = persona
-            elif criterio == 'Apellido':
-                for persona in lista_diccionarios:
-                    if persona['Apellido'].lower() == valor:
-                        resultado = persona
+            # Buscar por criterio (ID, Nombre o Apellido)
+            for persona in lista_diccionarios:
+                if (criterio == 'ID' and persona['Legajo'] == valor) or \
+                   (criterio == 'Nombre' and persona['Nombre'].lower() == valor) or \
+                   (criterio == 'Apellido' and persona['Apellido'].lower() == valor):
+                    resultado = persona
+                    break  # Salir del bucle si se encuentra el resultado
 
             if resultado:
                 mostrar_resultado_alumno(resultado)
@@ -84,11 +80,12 @@ def buscar_alumno(lista_diccionarios, frame_principal):
         boton_volver.pack(pady=10)
 
     def mostrar_menu_busqueda():
+        # Limpiar el frame antes de mostrar el menú de búsqueda
         for widget in frame_principal.winfo_children():
             widget.destroy()
             
         try:
-            image = ctk.CTkImage(light_image=Image.open("C:\\Users\\matyb\\OneDrive\\Escritorio\\uade_una_gran_universidad.png"),
+            image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
                                          size=(400, 240))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
@@ -114,4 +111,4 @@ def buscar_alumno(lista_diccionarios, frame_principal):
         boton_volver = ctk.CTkButton(frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=frame_principal.master.mostrar_menu_principal)
         boton_volver.pack(pady=10)
 
-    mostrar_menu_busqueda()
+    mostrar_menu_busqueda()  # Mostrar el menú de búsqueda al inicio

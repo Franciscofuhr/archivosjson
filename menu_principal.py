@@ -19,7 +19,7 @@ class App(ctk.CTk):
 
         # Cargar la imagen y almacenar en un atributo
         try:
-            self.my_image = ctk.CTkImage(light_image=Image.open("C:\\Users\\matyb\\OneDrive\\Escritorio\\uade_una_gran_universidad.png"),
+            self.my_image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
                                          size=(400, 240))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
@@ -56,11 +56,38 @@ class App(ctk.CTk):
         boton_estado_cursada = ctk.CTkButton(self.frame_principal, text="Estado de Cursada", fg_color="#061b2c", width=200, command=self.ejecutar_estado_cursada)
         boton_estado_cursada.pack(pady=5)
 
-        boton_busqueda_alumnos = ctk.CTkButton(self.frame_principal, text="Búsqueda de Alumnos", fg_color="#061b2c", width=200, command=self.buscar_alumnos)
-        boton_busqueda_alumnos.pack(pady=5)
+        # Cambiar aquí de "Búsqueda de Alumnos" a "Alumnos"
+        boton_alumnos = ctk.CTkButton(self.frame_principal, text="Alumnos", fg_color="#061b2c", width=200, command=self.mostrar_submenu_alumnos)
+        boton_alumnos.pack(pady=5)
 
         boton_salir = ctk.CTkButton(self.frame_principal, text="Salir", fg_color="#061b2c", width=150, command=self.quit)
         boton_salir.pack(pady=10)
+
+    def mostrar_submenu_alumnos(self):
+        self.limpiar_frame()  # Limpiar el contenido del frame actual
+
+        if self.my_image:
+            ctk.CTkLabel(self.frame_principal, image=self.my_image, text="").pack()  # Mostrar la imagen
+        else:
+            ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
+
+        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+        ctk.CTkLabel(self.frame_principal, text="Alumnos", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
+
+        boton_busqueda_alumnos = ctk.CTkButton(self.frame_principal, text="Búsqueda de Alumnos", fg_color="#061b2c", width=200, command=self.buscar_alumnos)
+        boton_busqueda_alumnos.pack(pady=5)
+
+        # Agregar botón para "Crear Alumno"
+        boton_crear_alumno = ctk.CTkButton(self.frame_principal, text="Crear Alumno", fg_color="#061b2c", width=200, command=self.mostrar_menu_crear_alumno)
+        boton_crear_alumno.pack(pady=5)
+
+        boton_volver = ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal)
+        boton_volver.pack(pady=10)
+
+    def mostrar_menu_crear_alumno(self):
+        # Llamar a la función de creación de alumno (debe estar implementada en funciones_alumnos/menu_crear.py)
+        from funciones_create.menu_crear import mostrar_menu_crear
+        mostrar_menu_crear(self.frame_principal)
 
     def mostrar_menu_parcial(self):
         self.limpiar_frame()  # Limpiar el contenido del frame actual
@@ -92,7 +119,6 @@ class App(ctk.CTk):
 
         ejecutar_opcion_parcial(opcion_parcial, self.lista_diccionarios, self.frame_principal)  # Mostrar el resultado en un frame
         
-        
         boton_volver = ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal) 
         boton_volver.pack(pady=5)  # Agregar un botón "Volver" para regresar al menú principal
 
@@ -116,17 +142,20 @@ class App(ctk.CTk):
             
         ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
 
+        # Buscar alumnos en el archivo CSV
         buscar_alumno(self.lista_diccionarios, self.frame_principal)
+        
+        boton_volver = ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal)
+        boton_volver.pack(pady=5)
 
     def limpiar_frame(self):
-        for widget in self.frame_principal.winfo_children(): # Limpiar el contenido del frame actual
+        for widget in self.frame_principal.winfo_children():
             widget.destroy()
 
-
+# Ejecución de la aplicación
 def main():
     app = App()
     app.mainloop()
-
 
 if __name__ == "__main__":
     main()
