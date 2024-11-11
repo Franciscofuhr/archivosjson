@@ -56,8 +56,8 @@ def mostrar_resultados(frame_principal, lista, tipo):
     resultados_textbox.insert("0.0", resultados_text)
     resultados_textbox.configure(state="disabled")  # Deshabilitar edición del textbox
 
-    # Botón para volver al menú anterior
-    boton_volver = ctk.CTkButton(frame_principal, text="Volver al menú anterior", fg_color="#061b2c", width=175, 
+    # Botón para Volver al menu anterior
+    boton_volver = ctk.CTkButton(frame_principal, text="Volver", fg_color="#061b2c", width=175, 
                                   command=lambda: mostrar_menu_cursada(frame_principal, frame_principal.master.lista_diccionarios))
     boton_volver.pack(pady=5)
 

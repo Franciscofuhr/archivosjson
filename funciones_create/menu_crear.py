@@ -2,42 +2,57 @@ import customtkinter as ctk
 import csv
 from utils.utils import validar_es_numero, validar_numero_rango, validar_sin_numeros
 from funciones_create.crear_alumno import agregar_fila_csv
+from PIL import Image
 
 def mostrar_menu_crear(frame):
     # Limpiar el frame para el formulario de crear alumno
     for widget in frame.winfo_children():
         widget.destroy()
+        
+    try:
+        image = ctk.CTkImage(light_image=Image.open('archivosjson\\assets\\uade_una_gran_universidad.png'),
+                                         size=(200, 120))
+    except Exception as e:
+        print(f"Error al cargar la imagen: {e}")
+        image = None
+        
+    if image:
+        ctk.CTkLabel(frame, image=image, text="").pack()  # Mostrar la imagen
+    else:
+        ctk.CTkLabel(frame, text="No se pudo cargar la imagen").pack()
+        
+    ctk.CTkLabel(frame, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
 
     # Crear los campos de entrada para el nuevo alumno
-    ctk.CTkLabel(frame, text="Crear Nuevo Alumno", font=("Arial", 20), text_color="#061b2c").pack(pady=10)
+    ctk.CTkLabel(frame, text="Crear Nuevo Alumno", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
     # Campos de texto para ingresar los datos del alumno
-    legajo_label = ctk.CTkLabel(frame, text="Legajo")
-    legajo_label.pack(pady=5)
-    legajo_entry = ctk.CTkEntry(frame)
-    legajo_entry.pack(pady=5)
+    legajo_label = ctk.CTkLabel(frame, text="Legajo", text_color="#061b2c")
+    legajo_label.pack(pady=0)
+    legajo_entry = ctk.CTkEntry(frame, width=200)
+    legajo_entry.pack(pady=0)
 
-    nombre_label = ctk.CTkLabel(frame, text="Nombre")
-    nombre_label.pack(pady=5)
-    nombre_entry = ctk.CTkEntry(frame)
-    nombre_entry.pack(pady=5)
+    nombre_label = ctk.CTkLabel(frame, text="Nombre", text_color="#061b2c")
+    nombre_label.pack(pady=0)
+    nombre_entry = ctk.CTkEntry(frame, width=200)
+    nombre_entry.pack(pady=0)
 
-    apellido_label = ctk.CTkLabel(frame, text="Apellido")
-    apellido_label.pack(pady=5)
-    apellido_entry = ctk.CTkEntry(frame)
-    apellido_entry.pack(pady=5)
+    apellido_label = ctk.CTkLabel(frame, text="Apellido", text_color="#061b2c")
+    apellido_label.pack(pady=0)
+    apellido_entry = ctk.CTkEntry(frame, width=200)
+    apellido_entry.pack(pady=0)
 
     # Nota 1er Parcial
-    nota1_label = ctk.CTkLabel(frame, text="Nota 1er Parcial")
-    nota1_label.pack(pady=5)
-    nota1_entry = ctk.CTkEntry(frame)
-    nota1_entry.pack(pady=5)
+    nota1_label = ctk.CTkLabel(frame, text="Nota 1er Parcial", text_color="#061b2c")
+    nota1_label.pack(pady=0)
+    nota1_entry = ctk.CTkEntry(frame, width=200)
+    nota1_entry.pack(pady=0)
 
     # Nota 2do Parcial
-    nota2_label = ctk.CTkLabel(frame, text="Nota 2do Parcial")
-    nota2_label.pack(pady=5)
-    nota2_entry = ctk.CTkEntry(frame)
-    nota2_entry.pack(pady=5)
+    nota2_label = ctk.CTkLabel(frame, text="Nota 2do Parcial", text_color="#061b2c")
+    nota2_label.pack(pady=0)
+    nota2_entry = ctk.CTkEntry(frame, width=200)
+    nota2_entry.pack(pady=0)
 
     # Función para guardar el alumno
     def guardar_alumno():
@@ -86,7 +101,7 @@ def mostrar_menu_crear(frame):
         nota1_entry.delete(0, 'end')
         nota2_entry.delete(0, 'end')
 
-        # No realizar la búsqueda ni volver al menú de alumnos
+        # No realizar la búsqueda ni Volver al menu de alumnos
         # Si no quieres recargar los datos de los alumnos ni llamar a `buscar_alumnos()`, simplemente comenta o elimina esa parte
         # frame.master.lista_diccionarios = frame.master.cargar_datos()
         # frame.master.buscar_alumnos()
@@ -95,6 +110,6 @@ def mostrar_menu_crear(frame):
     boton_guardar = ctk.CTkButton(frame, text="Guardar", fg_color="#061b2c", width=200, command=guardar_alumno)
     boton_guardar.pack(pady=20)
 
-    # Botón para volver al menú de alumnos
-    boton_volver = ctk.CTkButton(frame, text="Volver al menú de alumnos", fg_color="#061b2c", width=175, command=lambda: frame.master.mostrar_submenu_alumnos())
+    # Botón para Volver al menu de alumnos
+    boton_volver = ctk.CTkButton(frame, text="Volver", fg_color="#061b2c", width=175, command=lambda: frame.master.mostrar_submenu_alumnos())
     boton_volver.pack(pady=10)

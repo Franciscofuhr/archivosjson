@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from funciones_update.funciones_update import modificar_fila_csv
+from PIL import Image
 
 def mostrar_menu_update(frame_principal, app):
     """
@@ -9,14 +10,26 @@ def mostrar_menu_update(frame_principal, app):
     # Limpiar la pantalla actual
     for widget in frame_principal.winfo_children():
         widget.destroy()
+        
+    try:
+        image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
+                                         size=(200, 120))
+    except Exception as e:
+        print(f"Error al cargar la imagen: {e}")
+        image = None
+        
+    if image:
+        ctk.CTkLabel(frame_principal, image=image, text="").pack()  # Mostrar la imagen
+    else:
+        ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
 
-    ctk.CTkLabel(frame_principal, text="Modificar Alumno", font=("Arial", 24), text_color="#061b2c").pack(pady=10)
+    ctk.CTkLabel(frame_principal, text="Modificar Alumno", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
 
     # Ingreso del legajo a modificar (esto solo se muestra en la pantalla inicial)
     legajo_label = ctk.CTkLabel(frame_principal, text="Ingrese Legajo del Alumno", font=("Arial", 16), text_color="#061b2c")
     legajo_label.pack(pady=5)
     legajo_entry = ctk.CTkEntry(frame_principal, placeholder_text="Legajo del alumno", width=200)
-    legajo_entry.pack(pady=10)
+    legajo_entry.pack(pady=5)
 
     # Variable para almacenar los widgets que se mostrarán después de ingresar el legajo
     campos_editables = []
@@ -45,23 +58,37 @@ def mostrar_menu_update(frame_principal, app):
                 # Eliminar el campo de legajo y su etiqueta, solo si se encuentra el alumno
                 legajo_label.destroy()
                 legajo_entry.destroy()
+                
+                try:
+                    image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
+                                         size=(200, 120))
+                except Exception as e:
+                    print(f"Error al cargar la imagen: {e}")
+                    image = None
+        
+                if image:
+                    ctk.CTkLabel(frame_principal, image=image, text="").pack()  # Mostrar la imagen
+                else:
+                    ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
+
+                ctk.CTkLabel(frame_principal, text="Modificar Alumno", font=("Arial", 24), text_color="#061b2c").pack(pady=10)
 
                 # Mostrar los campos editables con la información actual
-                ctk.CTkLabel(frame_principal, text="Nombre", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
+                ctk.CTkLabel(frame_principal, text="Nombre", font=("Arial", 16), text_color="#061b2c").pack(pady=0)
                 nombre_entry = ctk.CTkEntry(frame_principal, placeholder_text=alumno["Nombre"], width=200)
-                nombre_entry.pack(pady=10)
+                nombre_entry.pack(pady=0)
 
-                ctk.CTkLabel(frame_principal, text="Apellido", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
+                ctk.CTkLabel(frame_principal, text="Apellido", font=("Arial", 16), text_color="#061b2c").pack(pady=0)
                 apellido_entry = ctk.CTkEntry(frame_principal, placeholder_text=alumno["Apellido"], width=200)
-                apellido_entry.pack(pady=10)
+                apellido_entry.pack(pady=0)
 
-                ctk.CTkLabel(frame_principal, text="Nota 1", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
+                ctk.CTkLabel(frame_principal, text="Nota 1er Parcial", font=("Arial", 16), text_color="#061b2c").pack(pady=0)
                 nota1_entry = ctk.CTkEntry(frame_principal, placeholder_text=alumno["nota1"], width=200)
-                nota1_entry.pack(pady=10)
+                nota1_entry.pack(pady=0)
 
-                ctk.CTkLabel(frame_principal, text="Nota 2", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
+                ctk.CTkLabel(frame_principal, text="Nota 2do Parcial", font=("Arial", 16), text_color="#061b2c").pack(pady=0)
                 nota2_entry = ctk.CTkEntry(frame_principal, placeholder_text=alumno["nota2"], width=200)
-                nota2_entry.pack(pady=10)
+                nota2_entry.pack(pady=0)
 
                 # Función para guardar los cambios
                 def guardar_modificaciones():
@@ -89,13 +116,13 @@ def mostrar_menu_update(frame_principal, app):
             ctk.CTkLabel(frame_principal, text="No se encontró ningún alumno con ese legajo.", font=("Arial", 14), text_color="red").pack(pady=5)
 
         # Mostrar botón Volver
-        ctk.CTkButton(frame_principal, text="Volver", fg_color="#061b2c", command=volver_a_ingresar_legajo).pack(pady=10)
+        ctk.CTkButton(frame_principal, text="Volver", fg_color="#061b2c", command=volver_a_ingresar_legajo).pack(pady=5)
 
     # Botón para buscar y mostrar los campos editables
-    ctk.CTkButton(frame_principal, text="Buscar Alumno", fg_color="#061b2c", command=buscar_y_mostrar).pack(pady=10)
+    ctk.CTkButton(frame_principal, text="Buscar Alumno", fg_color="#061b2c", command=buscar_y_mostrar).pack(pady=5)
 
-    # Botón para volver al menú de alumnos
-    boton_volver = ctk.CTkButton(frame_principal, text="Volver al menú de alumnos", fg_color="#061b2c", width=175, command=lambda: frame_principal.master.mostrar_submenu_alumnos())
+    # Botón para volver
+    boton_volver = ctk.CTkButton(frame_principal, text="Volver", fg_color="#061b2c", width=175, command=lambda: frame_principal.master.mostrar_submenu_alumnos())
     boton_volver.pack(pady=10)
     
     # Botón para volver a la pantalla de ingresar legajo
@@ -104,12 +131,12 @@ def mostrar_menu_update(frame_principal, app):
         for widget in frame_principal.winfo_children():
             widget.destroy()
 
-        ctk.CTkLabel(frame_principal, text="Modificar Alumno", font=("Arial", 24), text_color="#061b2c").pack(pady=10)
+        ctk.CTkLabel(frame_principal, text="Modificar Alumno", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
         ctk.CTkLabel(frame_principal, text="Ingrese Legajo del Alumno", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
         legajo_entry = ctk.CTkEntry(frame_principal, placeholder_text="Legajo del alumno", width=200)
         legajo_entry.pack(pady=10)
-        ctk.CTkButton(frame_principal, text="Buscar Alumno", fg_color="#061b2c", command=buscar_y_mostrar).pack(pady=10)
+        ctk.CTkButton(frame_principal, text="Buscar Alumno", fg_color="#061b2c", command=buscar_y_mostrar).pack(pady=5)
         
-        # Botón para volver al menú de alumnos
-        boton_volver = ctk.CTkButton(frame_principal, text="Volver al menú de alumnos", fg_color="#061b2c", width=175, command=lambda: frame_principal.master.mostrar_submenu_alumnos())
+        # Botón para volver
+        boton_volver = ctk.CTkButton(frame_principal, text="Volver", fg_color="#061b2c", width=175, command=lambda: frame_principal.master.mostrar_submenu_alumnos())
         boton_volver.pack(pady=10)

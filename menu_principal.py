@@ -11,7 +11,7 @@ class App(ctk.CTk):
         super().__init__()
 
         self.title("Programa de Notas Estudiantiles")
-        self.geometry("800x600")
+        self.geometry("1024x800")
         self._set_appearance_mode("system")
         self.configure(fg_color="#061b2c")
 
@@ -73,10 +73,10 @@ class App(ctk.CTk):
         ctk.CTkLabel(self.frame_principal, text="Alumnos", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
         # Botones para gestionar alumnos
-        ctk.CTkButton(self.frame_principal, text="Búsqueda de Alumnos", fg_color="#061b2c", width=200, command=self.buscar_alumnos).pack(pady=5)
+        ctk.CTkButton(self.frame_principal, text="Buscar Alumno", fg_color="#061b2c", width=200, command=self.buscar_alumnos).pack(pady=5)
         ctk.CTkButton(self.frame_principal, text="Crear Alumno", fg_color="#061b2c", width=200, command=self.mostrar_menu_crear_alumno).pack(pady=5)
-        ctk.CTkButton(self.frame_principal, text="Eliminar Alumno", fg_color="red", width=200, command=lambda: mostrar_menu_delete(self.frame_principal, self)).pack(pady=5)
         ctk.CTkButton(self.frame_principal, text="Modificar Alumno", fg_color="#061b2c", width=200, command=self.mostrar_menu_modificar_alumno).pack(pady=5)
+        ctk.CTkButton(self.frame_principal, text="Eliminar Alumno", fg_color="red", width=200, command=lambda: mostrar_menu_delete(self.frame_principal, self)).pack(pady=5)
         
         ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal).pack(pady=10)
 
@@ -105,7 +105,7 @@ class App(ctk.CTk):
 
         ctk.CTkButton(self.frame_principal, text="1er Parcial", fg_color="#061b2c", width=200, command=lambda: self.ejecutar_opcion_parcial("1")).pack(pady=5)
         ctk.CTkButton(self.frame_principal, text="2do Parcial", fg_color="#061b2c", width=200, command=lambda: self.ejecutar_opcion_parcial("2")).pack(pady=5)
-        ctk.CTkButton(self.frame_principal, text="Volver al menú principal", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal).pack(pady=10)
+        ctk.CTkButton(self.frame_principal, text="Volver", fg_color="#061b2c", width=175, command=self.mostrar_menu_principal).pack(pady=10)
 
     def ejecutar_opcion_parcial(self, opcion_parcial):
         # Ejecutar una opción de notas de parciales
@@ -147,6 +147,8 @@ class App(ctk.CTk):
             widget.destroy()
 
 # Crear la instancia y ejecutar la aplicación
-if __name__ == "__main__":
+def main():
     app = App()
     app.mainloop()
+if __name__ == "__main__":
+    main()

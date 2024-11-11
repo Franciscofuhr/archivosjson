@@ -50,7 +50,7 @@ def mostrar_botones_resultados(frame_principal, aprobados, desaprobados, parcial
         widget.destroy()
     
     try:
-        image = ctk.CTkImage(light_image=Image.open('arhivosjson\\assets\\uade_una_gran_universidad.png'),
+        image = ctk.CTkImage(light_image=Image.open('archivosjson\\assets\\uade_una_gran_universidad.png'),
                                          size=(400, 240))
     except Exception as e:
         print(f"Error al cargar la imagen: {e}")
@@ -73,8 +73,8 @@ def mostrar_botones_resultados(frame_principal, aprobados, desaprobados, parcial
                                         command=lambda: mostrar_resultados(frame_principal, desaprobados, parcial_nombre, "desaprobados"))
     boton_desaprobados.pack(pady=5)
 
-    # Botón para volver al menú anterior
-    boton_volver = ctk.CTkButton(frame_principal, text="Volver al menú anterior", fg_color="#061b2c", width=175, 
+    # Botón para Volver anterior
+    boton_volver = ctk.CTkButton(frame_principal, text="Volver", fg_color="#061b2c", width=175, 
                                   command=lambda: frame_principal.master.mostrar_menu_parcial())
     boton_volver.pack(pady=10)
 
@@ -83,9 +83,8 @@ def mostrar_resultados(frame_principal, lista, parcial_nombre, tipo):
     # Limpiar el frame antes de mostrar resultados
     for widget in frame_principal.winfo_children():
         widget.destroy()
-        
     try:
-        image = ctk.CTkImage(light_image=Image.open('arhivosjson\\assets\\uade_una_gran_universidad.png'),
+        image = ctk.CTkImage(light_image=Image.open('archivosjson\\assets\\uade_una_gran_universidad.png'),
                                          size=(200, 120))
     except Exception as e:
         print(f"Error al cargar la imagen: {e}")
@@ -109,7 +108,7 @@ def mostrar_resultados(frame_principal, lista, parcial_nombre, tipo):
     resultados_textbox.insert("0.0", resultados_text)
     resultados_textbox.configure(state="disabled")  # Deshabilitar edición del textbox
 
-    # Botón para volver al menú anterior
-    boton_volver = ctk.CTkButton(frame_principal, text="Volver al menú anterior", fg_color="#061b2c", width=175, 
+    # Botón para Volver al menu anterior
+    boton_volver = ctk.CTkButton(frame_principal, text="Volver", fg_color="#061b2c", width=175, 
                                   command=lambda: frame_principal.master.mostrar_menu_parcial())
     boton_volver.pack(pady=10)
