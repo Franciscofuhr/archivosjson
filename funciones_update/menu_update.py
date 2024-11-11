@@ -88,7 +88,7 @@ def mostrar_menu_update(frame_principal, app):
         if not alumno_encontrado:
             ctk.CTkLabel(frame_principal, text="No se encontró ningún alumno con ese legajo.", font=("Arial", 14), text_color="red").pack(pady=5)
 
-        # Mostrar botón Volver
+        # Botón Volver
         ctk.CTkButton(frame_principal, text="Volver", fg_color="#061b2c", command=volver_a_ingresar_legajo).pack(pady=10)
 
     # Botón para buscar y mostrar los campos editables
@@ -100,7 +100,6 @@ def mostrar_menu_update(frame_principal, app):
     
     # Botón para volver a la pantalla de ingresar legajo
     def volver_a_ingresar_legajo():
-        # Limpiar la pantalla y volver a mostrar el campo de legajo
         for widget in frame_principal.winfo_children():
             widget.destroy()
 

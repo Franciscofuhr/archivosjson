@@ -7,6 +7,7 @@ def clasificar_cursada(alumnos, nota_aprobacion, nota_promocion):
     aprobados = []
     aplazados = []
 
+    #Tomar datos de alumnos
     for alumno in alumnos:
         legajo = alumno['Legajo']
         nombre = alumno['Nombre']
@@ -17,6 +18,7 @@ def clasificar_cursada(alumnos, nota_aprobacion, nota_promocion):
             if nota1.isdigit() and nota2.isdigit():
                 nota1 = int(nota1)
                 nota2 = int(nota2)
+                # Clasificación
                 if nota1 >= nota_promocion and nota2 >= nota_promocion:
                     promocionados.append((legajo, nombre, apellido, nota1, nota2))
                 elif nota1 >= nota_aprobacion and nota2 >= nota_aprobacion:
@@ -27,7 +29,6 @@ def clasificar_cursada(alumnos, nota_aprobacion, nota_promocion):
     return promocionados, aprobados, aplazados
 
 def mostrar_resultados(frame_principal, lista, tipo):
-    # Limpiar el frame antes de mostrar resultados
     for widget in frame_principal.winfo_children():
         widget.destroy()
         
@@ -39,11 +40,13 @@ def mostrar_resultados(frame_principal, lista, tipo):
         image = None
         
     if image:
-        ctk.CTkLabel(frame_principal, image=image, text="").pack()  # Mostrar la imagen
+        ctk.CTkLabel(frame_principal, image=image, text="").pack()
     else:
         ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
 
-    resultados_text = f"{tipo.upper()}\n"
+    resultados_text = f"{tipo.upper()}\n" # Almacenar datos
+    
+    # Cargar datos si hay
     if lista:
         for alumno in lista:
             resultados_text += f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}\n"
@@ -61,10 +64,9 @@ def mostrar_resultados(frame_principal, lista, tipo):
                                   command=lambda: mostrar_menu_cursada(frame_principal, frame_principal.master.lista_diccionarios))
     boton_volver.pack(pady=5)
 
+# Mostrar las opciones de promoción, aprobación y aplazamiento en el frame.
 def mostrar_menu_cursada(frame, lista_diccionarios):
-    # Muestra las opciones de promoción, aprobación y aplazamiento en el frame.
     
-    # Limpiar el contenido del frame actual
     for widget in frame.winfo_children():
         widget.destroy()
         
@@ -83,9 +85,10 @@ def mostrar_menu_cursada(frame, lista_diccionarios):
     ctk.CTkLabel(frame, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)    
     ctk.CTkLabel(frame, text="Estado de Cursada", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
-    # Clasificar los alumnos una sola vez y pasar los resultados
+    # Clasificar los alumnos una sola vez y mostrar los resultados
     promocionados, aprobados, aplazados = clasificar_cursada(lista_diccionarios, NOTA_APROBACION, NOTA_PROMOCION)
 
+    # Botones de opción de clasificación
     boton_promocionados = ctk.CTkButton(frame, text="Ver Promocionados", fg_color="#061b2c", width=200, 
                                           command=lambda: mostrar_resultados(frame, promocionados, "Promocionados"))
     boton_promocionados.pack(pady=5)
@@ -101,7 +104,7 @@ def mostrar_menu_cursada(frame, lista_diccionarios):
     boton_volver = ctk.CTkButton(frame, text="Volver al menú principal", fg_color="#061b2c", width=175, 
                                   command=lambda: frame.master.mostrar_menu_principal())
     boton_volver.pack(pady=5)
-
+    
+#Inicia la opción de cursada, mostrando el menú.
 def ejecutar_opcion_cursada(lista_diccionarios, frame_principal):
-    """Inicia la opción de cursada, mostrando el menú."""
     mostrar_menu_cursada(frame_principal, lista_diccionarios)
