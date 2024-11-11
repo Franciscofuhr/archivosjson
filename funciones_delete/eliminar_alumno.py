@@ -2,7 +2,6 @@ import csv
 import os
 
 def eliminar_fila_csv(legajo_a_eliminar):
-    # Ruta del archivo
     ruta_archivo = 'archivosjson\\datosAlumnos.csv'
     
     # Verificamos si el archivo existe

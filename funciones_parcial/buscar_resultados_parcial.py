@@ -6,7 +6,7 @@ from PIL import Image
 def clasificar_parcial(alumnos, parcial, nota_aprobacion):
     aprobados = []
     desaprobados = []
-
+    #Tomamos datos
     for alumno in alumnos:
         legajo = alumno['Legajo']
         nombre = alumno['Nombre']
@@ -15,6 +15,7 @@ def clasificar_parcial(alumnos, parcial, nota_aprobacion):
             nota = alumno[parcial]
             if nota.isdigit():
                 nota = int(nota)
+                #Clasificación
                 if nota >= nota_aprobacion:
                     aprobados.append((legajo, nombre, apellido, nota))
                 else:
@@ -26,7 +27,7 @@ def clasificar_parcial(alumnos, parcial, nota_aprobacion):
 
     return aprobados, desaprobados
 
-
+# Funcion para pedir número parcial a mostrar
 def ejecutar_opcion_parcial(opcion_parcial, lista_diccionarios, frame_principal):
     if opcion_parcial == '1':
         parcial = 'nota1'
@@ -45,7 +46,6 @@ def ejecutar_opcion_parcial(opcion_parcial, lista_diccionarios, frame_principal)
 
 
 def mostrar_botones_resultados(frame_principal, aprobados, desaprobados, parcial_nombre):
-    # Limpiar el frame antes de mostrar resultados
     for widget in frame_principal.winfo_children():
         widget.destroy()
     
@@ -64,7 +64,7 @@ def mostrar_botones_resultados(frame_principal, aprobados, desaprobados, parcial
     ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
     ctk.CTkLabel(frame_principal, text="Notas de Parciales", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
-    # Crear botones para mostrar aprobados y desaprobados
+    # Botones para mostrar aprobados y desaprobados
     boton_aprobados = ctk.CTkButton(frame_principal, text=f"Mostrar Aprobados", fg_color="#061b2c", width=200,
                                      command=lambda: mostrar_resultados(frame_principal, aprobados, parcial_nombre, "aprobados"))
     boton_aprobados.pack(pady=5)
@@ -80,7 +80,6 @@ def mostrar_botones_resultados(frame_principal, aprobados, desaprobados, parcial
 
 
 def mostrar_resultados(frame_principal, lista, parcial_nombre, tipo):
-    # Limpiar el frame antes de mostrar resultados
     for widget in frame_principal.winfo_children():
         widget.destroy()
     try:
@@ -91,11 +90,11 @@ def mostrar_resultados(frame_principal, lista, parcial_nombre, tipo):
         image = None
         
     if image:
-        ctk.CTkLabel(frame_principal, image=image, text="").pack()  # Mostrar la imagen
+        ctk.CTkLabel(frame_principal, image=image, text="").pack()
     else:
         ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
 
-    resultados_text = f"{parcial_nombre.upper()} - {tipo.upper()}\n"
+    resultados_text = f"{parcial_nombre.upper()} - {tipo.upper()}\n" #Almacenar resultado
     if lista:
         for alumno in lista:
             resultados_text += f"Legajo: {alumno[0]}, Apellido: {alumno[2]}, Nombre: {alumno[1]}, Nota {parcial_nombre}: {alumno[3]}\n"

@@ -127,7 +127,6 @@ def mostrar_menu_update(frame_principal, app):
     
     # Botón para volver a la pantalla de ingresar legajo
     def volver_a_ingresar_legajo():
-        # Limpiar la pantalla y volver a mostrar el campo de legajo
         for widget in frame_principal.winfo_children():
             widget.destroy()
 

@@ -2,6 +2,7 @@ import customtkinter as ctk
 from PIL import Image
 
 def buscar_alumno(lista_diccionarios, frame_principal):
+    
     # Limpiar el frame antes de mostrar resultados
     for widget in frame_principal.winfo_children():
         widget.destroy()
@@ -19,11 +20,11 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
 
     def mostrar_resultado_alumno(alumno):
-        # Limpiar el frame antes de mostrar el alumno
+        
         for widget in frame_principal.winfo_children():
             widget.destroy()
             
-        try:
+        try: #cargar imagen
             image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
                                      size=(200, 120))
         except Exception as e:
@@ -66,9 +67,10 @@ def buscar_alumno(lista_diccionarios, frame_principal):
         ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
         ctk.CTkLabel(frame_principal, text="Búsqueda", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
-        entry = ctk.CTkEntry(frame_principal, placeholder_text=f"Ingrese el {criterio}")
+        entry = ctk.CTkEntry(frame_principal, placeholder_text=f"Ingrese el {criterio}") # Tomar criterio del usuario
         entry.pack(pady=5)
 
+        
         def realizar_busqueda():
             valor = entry.get().lower()
             resultado = None
@@ -93,8 +95,9 @@ def buscar_alumno(lista_diccionarios, frame_principal):
         boton_volver = ctk.CTkButton(frame_principal, text="Volver", fg_color="#061b2c", width=200, command=mostrar_menu_busqueda)
         boton_volver.pack(pady=10)
 
+    # Menu de buscar alumno
     def mostrar_menu_busqueda():
-        # Limpiar el frame antes de mostrar el menú de búsqueda
+
         for widget in frame_principal.winfo_children():
             widget.destroy()
             
