@@ -155,7 +155,7 @@ class App(ctk.CTk):
 
     # Limpiar el contenido del frame actual
     def limpiar_frame(self):
-        
+        self.lista_diccionarios = self.cargar_datos()
         for widget in self.frame_principal.winfo_children():
             widget.destroy()
 
