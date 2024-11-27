@@ -7,6 +7,7 @@ def clasificar_cursada(alumnos, nota_aprobacion, nota_promocion):
     aprobados = []
     aplazados = []
 
+    #Tomar datos de alumnos
     for alumno in alumnos:
         legajo = alumno['Legajo']
         nombre = alumno['Nombre']
@@ -17,9 +18,7 @@ def clasificar_cursada(alumnos, nota_aprobacion, nota_promocion):
             if nota1.isdigit() and nota2.isdigit():
                 nota1 = int(nota1)
                 nota2 = int(nota2)
-                if not (0 <= nota1 <= 100) or not (0 <= nota2 <= 100):
-                    print(Fore.RED + "Error: Las notas deben estar en el rango de 0 a 100." + Style.RESET_ALL)
-                    continue
+                # Clasificación
                 if nota1 >= nota_promocion and nota2 >= nota_promocion:
                     promocionados.append((legajo, nombre, apellido, nota1, nota2))
                 elif nota1 >= nota_aprobacion and nota2 >= nota_aprobacion:
@@ -33,40 +32,83 @@ def clasificar_cursada(alumnos, nota_aprobacion, nota_promocion):
 
     return promocionados, aprobados, aplazados
 
+def mostrar_resultados(frame_principal, lista, tipo):
+    for widget in frame_principal.winfo_children():
+        widget.destroy()
+        
+    try:
+        image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
+                                         size=(200, 120))
+    except Exception as e:
+        print(f"Error al cargar la imagen: {e}")
+        image = None
+        
+    if image:
+        ctk.CTkLabel(frame_principal, image=image, text="").pack()
+    else:
+        ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
 
-def ejecutar_opcion_cursada(lista_diccionarios):
+    resultados_text = f"{tipo.upper()}\n" # Almacenar datos
+    
+    # Cargar datos si hay
+    if lista:
+        for alumno in lista:
+            resultados_text += f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}\n"
+    else:
+        resultados_text += f"No hay alumnos {tipo}.\n"
+
+    # Mostrar el resultado en un textbox en la ventana
+    resultados_textbox = ctk.CTkTextbox(frame_principal, width=500, height=300)
+    resultados_textbox.pack(pady=10)
+    resultados_textbox.insert("0.0", resultados_text)
+    resultados_textbox.configure(state="disabled")  # Deshabilitar edición del textbox
+
+    # Botón para Volver al menu anterior
+    boton_volver = ctk.CTkButton(frame_principal, text="Volver", fg_color="#061b2c", width=175, 
+                                  command=lambda: mostrar_menu_cursada(frame_principal, frame_principal.master.lista_diccionarios))
+    boton_volver.pack(pady=5)
+
+# Mostrar las opciones de promoción, aprobación y aplazamiento en el frame.
+def mostrar_menu_cursada(frame, lista_diccionarios):
+    
+    for widget in frame.winfo_children():
+        widget.destroy()
+        
+    try:
+        image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
+                                         size=(400, 240))
+    except Exception as e:
+        print(f"Error al cargar la imagen: {e}")
+        image = None
+        
+    if image:
+        ctk.CTkLabel(frame, image=image, text="").pack()  # Mostrar la imagen
+    else:
+        ctk.CTkLabel(frame, text="No se pudo cargar la imagen").pack()
+        
+    ctk.CTkLabel(frame, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)    
+    ctk.CTkLabel(frame, text="Estado de Cursada", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
+
+    # Clasificar los alumnos una sola vez y mostrar los resultados
     promocionados, aprobados, aplazados = clasificar_cursada(lista_diccionarios, NOTA_APROBACION, NOTA_PROMOCION)
-    bandera = True
-    while bandera:
-        print(f"\n{Back.WHITE + Fore.BLUE + Style.BRIGHT}--- Cursada ---{Back.RESET}\n")
-        print(f"{Fore.CYAN}1. {Fore.RESET}Ver Promocionados")
-        print(f"{Fore.CYAN}2. {Fore.RESET}Ver Aprobados")
-        print(f"{Fore.CYAN}3. {Fore.RESET}Ver Aplazados")
-        print(f"{Fore.CYAN}4. {Fore.RESET}Volver al menú principal")
-        print()
 
-        opcion_cursada = input(f"{Back.WHITE + Fore.BLUE + Style.BRIGHT}Selecciona una opción (1, 2, 3, 4 para salir): {Back.RESET}").lower()
+    # Botones de opción de clasificación
+    boton_promocionados = ctk.CTkButton(frame, text="Ver Promocionados", fg_color="#061b2c", width=200, 
+                                          command=lambda: mostrar_resultados(frame, promocionados, "Promocionados"))
+    boton_promocionados.pack(pady=5)
 
-        if opcion_cursada == '1':
-            print(f"\n{Fore.GREEN + Style.BRIGHT}--- Promocionados ---\n")
-            for alumno in promocionados:
-                print(Fore.GREEN + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
-            if len(promocionados) == 0:
-                print(f"\n{Fore.RED}No hay alumnos promocionados.")
-        elif opcion_cursada == '2':
-            print(f"\n{Fore.YELLOW + Style.BRIGHT}--- Aprobados ---\n")
-            for alumno in aprobados:
-                print(Fore.YELLOW + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
-            if len(aprobados) == 0:
-                print(f"\n{Back.RED + Fore.WHITE}No hay alumnos aprobados.")
-        elif opcion_cursada == '3':
-            print(f"\n{Fore.RED + Style.BRIGHT}--- Aplazados ---\n")
-            for alumno in aplazados:
-                print(Fore.RED + f"Legajo: {alumno[0]}, {alumno[1]} {alumno[2]}: 1er Parcial: {alumno[3]} / 2do Parcial: {alumno[4]}" + Style.RESET_ALL)
-            if len(aplazados) == 0:
-                print(f"\n{Fore.RED}No hay alumnos aplazados.")
-        elif opcion_cursada == '4':
-            print(f"\n{Fore.RED + Style.BRIGHT}--- Volviendo al menú principal... ---")
-            bandera = False
-        else:
-            print(f"\n{Fore.RED}Opción no válida. Intenta nuevamente.")
+    boton_aprobados = ctk.CTkButton(frame, text="Ver Aprobados", fg_color="#061b2c", width=200, 
+                                      command=lambda: mostrar_resultados(frame, aprobados, "Aprobados"))
+    boton_aprobados.pack(pady=5)
+
+    boton_aplazados = ctk.CTkButton(frame, text="Ver Aplazados", fg_color="#061b2c", width=200, 
+                                      command=lambda: mostrar_resultados(frame, aplazados, "Aplazados"))
+    boton_aplazados.pack(pady=5)
+
+    boton_volver = ctk.CTkButton(frame, text="Volver al menú principal", fg_color="#061b2c", width=175, 
+                                  command=lambda: frame.master.mostrar_menu_principal())
+    boton_volver.pack(pady=5)
+    
+#Inicia la opción de cursada, mostrando el menú.
+def ejecutar_opcion_cursada(lista_diccionarios, frame_principal):
+    mostrar_menu_cursada(frame_principal, lista_diccionarios)
