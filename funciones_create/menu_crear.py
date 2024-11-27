@@ -85,18 +85,23 @@ def mostrar_menu_crear(frame):
             ctk.CTkLabel(frame, text="El nombre y apellido no debe contener numeros", text_color="red").pack(pady=5)
             return
             
-        agregar_fila_csv(legajo, nombre, apellido, nota1, nota2)
+        try:
+            agregar_fila_csv(legajo, nombre, apellido, nota1, nota2)
+            
+            # Mensaje de éxito
+            mensaje_exito = ctk.CTkLabel(frame, text="Alumno creado exitosamente", text_color="green")
+            mensaje_exito.pack(pady=5)
 
-        # Mensaje de éxito
-        mensaje_exito = ctk.CTkLabel(frame, text="Alumno creado exitosamente", text_color="green")
-        mensaje_exito.pack(pady=5)
+            # Limpiar los campos después de guardar
+            legajo_entry.delete(0, 'end')
+            nombre_entry.delete(0, 'end')
+            apellido_entry.delete(0, 'end')
+            nota1_entry.delete(0, 'end')
+            nota2_entry.delete(0, 'end')
 
-        # Limpiar los campos después de guardar
-        legajo_entry.delete(0, 'end')
-        nombre_entry.delete(0, 'end')
-        apellido_entry.delete(0, 'end')
-        nota1_entry.delete(0, 'end')
-        nota2_entry.delete(0, 'end')
+        except ValueError as e:
+            # Mostrar el mensaje de error en la interfaz
+            ctk.CTkLabel(frame, text=str(e), text_color="red").pack(pady=5)
 
         # No realizar la búsqueda ni Volver al menu de alumnos
         # Si no quieres recargar los datos de los alumnos ni llamar a `buscar_alumnos()`, simplemente comenta o elimina esa parte

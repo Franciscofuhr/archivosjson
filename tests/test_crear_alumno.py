@@ -42,6 +42,18 @@ class TestCrearAlumno(unittest.TestCase):
             agregar_fila_csv(legajo, "Otro Nombre", "Otro Apellido", 85, 95)
         
         self.eliminar_alumno(legajo)
+        
+    def test_agregar_alumno_con_datos_invalidos(self):
+        legajo = 7777
+        nombre = "Invalid"
+        apellido = "User "
+        
+        # Notas fuera de rango
+        nota1 = 110  
+        nota2 = -10  
+
+        with self.assertRaises(ValueError):
+            agregar_fila_csv(legajo, nombre, apellido, nota1, nota2)
 
     # Eliminar alumno de prueba
     def eliminar_alumno(self, legajo_a_eliminar):
