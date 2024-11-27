@@ -1,8 +1,7 @@
 import csv
-import colorama
-from colorama import Fore, Back, Style
+import customtkinter as ctk
 from funciones_parcial.buscar_resultados_parcial import ejecutar_opcion_parcial
-from funciones_alumno.buscar_alumnos import buscar_alumno
+from funciones_alumnos.buscar_alumnos import buscar_alumno
 from funciones_cursada.clasificar_cursada import ejecutar_opcion_cursada
 from funciones_delete.menu_delete import mostrar_menu_delete
 from PIL import Image
@@ -38,7 +37,7 @@ class App(ctk.CTk):
 
     def cargar_datos(self): # Cargar los datos de los alumnos desde el archivo CSV
 
-        with open('archivosjson\\datosAlumnos.csv', mode='r') as archivo_csv:
+        with open('C:/Users/lauta/OneDrive/Escritorio/archivosjson/datosAlumnos.csv', mode='r') as archivo_csv:
             lector_csv = csv.DictReader(archivo_csv, delimiter=';')
             return [fila for fila in lector_csv]
 

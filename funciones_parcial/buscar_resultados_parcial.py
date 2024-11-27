@@ -1,16 +1,7 @@
+from email.mime import image
 from variables_globales import NOTA_APROBACION
-from colorama import Fore, Back, Style
-
-
-def mostrar_menu_aprobados_desaprobados():
-    print()
-    print(f"{Back.WHITE + Fore.BLUE + Style.BRIGHT}--- Opciones ---")
-    print()
-    print(f"{Fore.CYAN}1. {Fore.RESET}Aprobados")
-    print(f"{Fore.CYAN}2. {Fore.RESET}Desaprobados")
-    print(f"{Fore.CYAN}3. {Fore.RESET}Volver al menu principal")
-    print()
-
+import customtkinter as ctk
+from PIL import Image
 
 def clasificar_parcial(alumnos, parcial, nota_aprobacion):
     aprobados = []
@@ -30,9 +21,9 @@ def clasificar_parcial(alumnos, parcial, nota_aprobacion):
                 else:
                     desaprobados.append((legajo, nombre, apellido, nota))
             else:
-                print(Fore.RED + f"Error: La nota '{nota}' no es un número válido." + Style.RESET_ALL)
+                return f"Error: La nota '{nota}' no es un número válido."
         else:
-            print(Fore.RED + f"Error: La columna '{parcial}' no existe en los datos." + Style.RESET_ALL)
+            return f"Error: La columna '{parcial}' no existe en los datos."
 
     return aprobados, desaprobados
 

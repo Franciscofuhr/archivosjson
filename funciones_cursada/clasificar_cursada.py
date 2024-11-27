@@ -1,6 +1,6 @@
 from variables_globales import NOTA_APROBACION, NOTA_PROMOCION
-from colorama import Fore, Back, Style
-
+import customtkinter as ctk
+from PIL import Image
 
 def clasificar_cursada(alumnos, nota_aprobacion, nota_promocion):
     promocionados = []
@@ -25,11 +25,7 @@ def clasificar_cursada(alumnos, nota_aprobacion, nota_promocion):
                     aprobados.append((legajo, nombre, apellido, nota1, nota2))
                 else:
                     aplazados.append((legajo, nombre, apellido, nota1, nota2))
-            else:
-                print(Fore.RED + "Error: Una de las notas no es un número válido." + Style.RESET_ALL)
-        else:
-            print(Fore.RED + "Error: Faltan las columnas 'nota1' o 'nota2' en los datos." + Style.RESET_ALL)
-
+    
     return promocionados, aprobados, aplazados
 
 def mostrar_resultados(frame_principal, lista, tipo):
