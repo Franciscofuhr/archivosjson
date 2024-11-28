@@ -18,7 +18,17 @@ def agregar_fila_csv(legajo, nombre, apellido, nota1, nota2):
         for fila in lector_csv:
             if fila[0] == str(legajo):
                 raise ValueError(f"El legajo {legajo} ya existe.")
-            
+    
+    # Verificar si se colocó un legajo
+    if not legajo:
+        raise ValueError("El legajo no puede estar vacío.")
+    
+    if not nombre:
+        raise ValueError("El nombre no puede estar vacío.")
+    
+    if not apellido:
+        raise ValueError("El apellido no puede estar vacío.")
+    
     # Verificar que las notas estén en el rango correcto
     if nota1 < 0 or nota1 > 100 or nota2 < 0 or nota2 > 100:
         raise ValueError("Las notas deben ser un número entre 0 y 100.")

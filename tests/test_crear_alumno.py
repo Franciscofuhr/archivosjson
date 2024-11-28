@@ -54,7 +54,37 @@ class TestCrearAlumno(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             agregar_fila_csv(legajo, nombre, apellido, nota1, nota2)
+            
+    def test_agregar_legajo_vacio(self):
+        legajo = ""
+        nombre = "Test"
+        apellido = "User "
+        nota1 = 80
+        nota2 = 90
 
+        with self.assertRaises(ValueError):
+            agregar_fila_csv(legajo, nombre, apellido, nota1, nota2)
+
+    def test_agregar_nombre_vacio(self):
+        legajo = 99999
+        nombre = ""
+        apellido = "User "
+        nota1 = 80
+        nota2 = 90
+
+        with self.assertRaises(ValueError):
+            agregar_fila_csv(legajo, nombre, apellido, nota1, nota2)
+            
+    def test_agregar_apellido_vacio(self):
+        legajo = 99999
+        nombre = "Test"
+        apellido = ""
+        nota1 = 80
+        nota2 = 90
+
+        with self.assertRaises(ValueError):
+            agregar_fila_csv(legajo, nombre, apellido, nota1, nota2)
+    
     # Eliminar alumno de prueba
     def eliminar_alumno(self, legajo_a_eliminar):
         filas_restantes = []
