@@ -9,6 +9,7 @@ def eliminar_fila_csv(legajo_a_eliminar):
         print("El archivo no existe.")
         return
 
+
     # Bandera para verificar si se eliminó alguna fila
     fila_eliminada = False
 
@@ -17,13 +18,15 @@ def eliminar_fila_csv(legajo_a_eliminar):
     with open(ruta_archivo, mode='r', newline='') as archivo_csv:
         reader = csv.reader(archivo_csv, delimiter=';')
         encabezado = next(reader)  # Guardamos el encabezado
-        filas_restantes.append(encabezado)  # Lo agregamos para reescribirlo luego
+        filas_restantes.append(encabezado)  
         for fila in reader:
-            if int(fila[0]) == legajo_a_eliminar:  # Compara el legajo
-                fila_eliminada = True  # Marca que se encontró y eliminó
+            if int(fila[0]) == legajo_a_eliminar: 
+                fila_eliminada = True  
             else:
                 filas_restantes.append(fila)  # Mantiene las filas que no se eliminan
-
+    if not fila_eliminada:
+        raise ValueError(f"Ingrese un número de legajo válido.")
+    
     # Si se eliminó alguna fila, reescribimos el archivo
     if fila_eliminada:
         with open(ruta_archivo, mode='w', newline='') as archivo_csv:
