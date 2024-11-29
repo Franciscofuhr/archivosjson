@@ -65,8 +65,8 @@ def mostrar_menu_crear(frame):
         legajo = legajo_entry.get()
         nombre = nombre_entry.get()
         apellido = apellido_entry.get()
-        nota1 = nota1_entry.get()
-        nota2 = nota2_entry.get()
+        nota1 = int(nota1_entry.get())
+        nota2 = int(nota2_entry.get())
 
         # Validar que todos los campos de texto
         if not legajo or not nombre or not apellido or not nota1 or not nota2:
