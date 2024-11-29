@@ -2,7 +2,7 @@ import csv
 import os
 
 def modificar_fila_csv(legajo_a_modificar, nuevo_nombre=None, nuevo_apellido=None, nueva_nota1=None, nueva_nota2=None):
-    ruta_archivo = 'archivosjson\\datosAlumnos.csv'
+    ruta_archivo = 'C:/Users/lauta/OneDrive/Escritorio/archivosjson/datosAlumnos.csv'
     
     if not os.path.exists(ruta_archivo):
         print("El archivo no existe.")
@@ -25,7 +25,9 @@ def modificar_fila_csv(legajo_a_modificar, nuevo_nombre=None, nuevo_apellido=Non
                 fila[4] = nueva_nota2 if nueva_nota2 is not None else fila[4]
                 fila_modificada = True
             filas_actualizadas.append(fila)
-
+            
+    if not fila_modificada:
+        raise ValueError(f"No se encontró ningún alumno con ese legajo.")
     # Si se encontró y modificó la fila, reescribimos el archivo
     if fila_modificada:
         with open(ruta_archivo, mode='w', newline='') as archivo_csv:
