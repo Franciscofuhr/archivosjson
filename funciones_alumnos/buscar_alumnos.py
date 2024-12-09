@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from PIL import Image
-from utils.utils import eliminar_widget 
+from utils.utils import eliminar_widget, validar_es_numero, validar_sin_numeros
 
 def buscar_alumno(lista_diccionarios, frame_principal):
     
@@ -75,6 +75,19 @@ def buscar_alumno(lista_diccionarios, frame_principal):
         def realizar_busqueda():
             valor = entry.get().lower()
             resultado = None
+
+            if criterio == "ID" and validar_es_numero(valor):
+                id_no_valido = ctk.CTkLabel(frame_principal, text="No se encontraron coincidencias.", text_color="red")
+                id_no_valido.pack(pady=10)
+                id_no_valido.after(3000,lambda: eliminar_widget(sin_coincidendias))
+                return
+
+            if criterio == ("Nombre" or "Apellido") and validar_sin_numeros(valor):
+                texto_invalido = ctk.CTkLabel(frame_principal, text="No se encontraron coincidencias.", text_color="red")
+                texto_invalido.pack(pady=10)
+                texto_invalido.after(3000,lambda: eliminar_widget(sin_coincidendias))
+                return
+
 
             
             # Buscar por criterio (ID, Nombre o Apellido)
