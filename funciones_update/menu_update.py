@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from funciones_update.funciones_update import modificar_fila_csv
-from utils.utils import validar_es_numero, validar_numero_rango, validar_sin_numeros
+from utils.utils import validar_es_numero, validar_numero_rango, validar_sin_numeros, eliminar_widget
 from PIL import Image
 
 def mostrar_menu_update(frame_principal, app):
@@ -36,13 +36,17 @@ def mostrar_menu_update(frame_principal, app):
             try:
                 legajo = int(legajo)
             except ValueError:
-                ctk.CTkLabel(frame_principal, text="Por favor ingrese un número de legajo válido.", font=("Arial", 14), text_color="red").pack(pady=5)
+                legajo_valido_error = ctk.CTkLabel(frame_principal, text="Por favor ingrese un número de legajo válido.", font=("Arial", 14), text_color="red")
+                legajo_valido_error.pack(pady=5)
+                legajo_valido_error.after(3000, lambda : eliminar_widget(legajo_valido_error))
                 return
 
             # Buscar el alumno
             alumno = next((a for a in app.lista_diccionarios if int(a["Legajo"]) == legajo), None)
             if alumno is None:
-                ctk.CTkLabel(frame_principal, text="No se encontró ningún alumno con ese legajo.", font=("Arial", 14), text_color="red").pack(pady=5)
+                no_encontrado_error = ctk.CTkLabel(frame_principal, text="No se encontró ningún alumno con ese legajo.", font=("Arial", 14), text_color="red")
+                no_encontrado_error.pack(pady=5)
+                no_encontrado_error.after(3000, lambda : eliminar_widget(no_encontrado_error))
                 return
 
             # Mostrar los campos editables
@@ -93,25 +97,35 @@ def mostrar_menu_update(frame_principal, app):
             nueva_nota2 = nota2_entry.get() or alumno["nota2"]
             
             if not legajo or not nuevo_nombre or not nuevo_apellido or not nueva_nota1 or not nueva_nota2:
-                ctk.CTkLabel(frame_principal, text="Por favor complete todos los campos", text_color="red").pack(pady=5)
+                contenido_error = ctk.CTkLabel(frame_principal, text="Por favor complete todos los campos", text_color="red")
+                contenido_error.pack(pady=5)
+                contenido_error.after(3000,lambda: eliminar_widget(contenido_error))
                 return
 
             if not validar_es_numero(legajo):
-                ctk.CTkLabel(frame_principal, text="El legajo debe ser un numero", text_color="red").pack(pady=5)
+                legajo_error = ctk.CTkLabel(frame_principal, text="El legajo debe ser un numero", text_color="red")
+                legajo_error.pack(pady=5)
+                legajo_error.after(3000,lambda: eliminar_widget(legajo_error))
                 return
 
             if not validar_es_numero(nueva_nota1) or not validar_es_numero(nueva_nota2) or not validar_numero_rango(nueva_nota1) or not validar_numero_rango(nueva_nota2):
-                ctk.CTkLabel(frame_principal, text="Las notas deben ser un numero entre 0 y 100", text_color="red").pack(pady=5)
+                notas_error = ctk.CTkLabel(frame_principal, text="Las notas deben ser un numero entre 0 y 100", text_color="red")
+                notas_error.pack(pady=5)
+                notas_error.after(3000,lambda: eliminar_widget(notas_error))
                 return
 
 
             if not validar_sin_numeros(nuevo_nombre) or not validar_sin_numeros(nuevo_apellido):
-                ctk.CTkLabel(frame_principal, text="El nombre y apellido no debe contener numeros", text_color="red").pack(pady=5)
+                nombre_error = ctk.CTkLabel(frame_principal, text="El nombre y apellido no debe contener numeros", text_color="red")
+                nombre_error.pack(pady=5)
+                nombre_error.after(3000,lambda: eliminar_widget(nombre_error))
                 return
 
             # Guardar las modificaciones
             modificar_fila_csv(legajo, nuevo_nombre, nuevo_apellido, nueva_nota1, nueva_nota2)
-            ctk.CTkLabel(frame_principal, text="¡Alumno modificado con éxito!", font=("Arial", 16), text_color="green").pack(pady=10)
+            eliminado_exito = ctk.CTkLabel(frame_principal, text="¡Alumno modificado con éxito!", font=("Arial", 16), text_color="green")
+            eliminado_exito.pack(pady=10)
+            eliminado_exito.after(3000,lambda: eliminar_widget(eliminado_exito))
 
         # Botón para guardar
         ctk.CTkButton(frame_principal, text="Guardar Cambios", fg_color="#061b2c", command=guardar_modificaciones).pack(pady=10)
