@@ -12,3 +12,7 @@ def validar_numero_rango(valor):
         return False  # Si no es un número, retorna False
 def validar_sin_numeros(valor):
     return not any(char.isdigit() for char in valor)
+
+def eliminar_widget(widget):
+    widget.destroy()  
+    return
