@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from PIL import Image
+from utils.utils import eliminar_widget 
 
 def buscar_alumno(lista_diccionarios, frame_principal):
     
@@ -8,7 +9,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
         widget.destroy()
         
     try:
-        image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
+        image = ctk.CTkImage(light_image=Image.open("assets\\uade_una_gran_universidad.png"),
                                      size=(200, 120))
     except Exception as e:
         print(f"Error al cargar la imagen: {e}")
@@ -25,7 +26,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             widget.destroy()
             
         try: #cargar imagen
-            image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
+            image = ctk.CTkImage(light_image=Image.open("assets\\uade_una_gran_universidad.png"),
                                      size=(200, 120))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
@@ -53,7 +54,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             widget.destroy()
             
         try:
-            image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
+            image = ctk.CTkImage(light_image=Image.open("assets\\uade_una_gran_universidad.png"),
                                          size=(200, 120))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
@@ -87,7 +88,9 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             if resultado:
                 mostrar_resultado_alumno(resultado)
             else:
-                ctk.CTkLabel(frame_principal, text="No se encontraron coincidencias.", text_color="red").pack(pady=10)
+                sin_coincidendias = ctk.CTkLabel(frame_principal, text="No se encontraron coincidencias.", text_color="red")
+                sin_coincidendias.pack(pady=10)
+                sin_coincidendias.after(3000,lambda: eliminar_widget(sin_coincidendias))
 
         boton_buscar = ctk.CTkButton(frame_principal, text="Buscar", fg_color="#061b2c", width=200, command=realizar_busqueda)
         boton_buscar.pack(pady=5)
@@ -102,7 +105,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             widget.destroy()
             
         try:
-            image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
+            image = ctk.CTkImage(light_image=Image.open("assets\\uade_una_gran_universidad.png"),
                                          size=(400, 240))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")

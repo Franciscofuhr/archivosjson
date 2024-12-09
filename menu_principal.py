@@ -21,7 +21,7 @@ class App(ctk.CTk):
 
         # Cargar la imagen como una variable
         try:
-            self.my_image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
+            self.my_image = ctk.CTkImage(light_image=Image.open("assets\\uade_una_gran_universidad.png"),
                                          size=(400, 240))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
