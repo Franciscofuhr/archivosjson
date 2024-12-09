@@ -21,6 +21,8 @@ def mostrar_menu_update(frame_principal, app):
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
             ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
+            
+        ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
 
         # Título y campos de entrada
         ctk.CTkLabel(frame_principal, text="Modificar Alumno", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
@@ -56,6 +58,13 @@ def mostrar_menu_update(frame_principal, app):
         # Limpiar los widgets actuales
         for widget in frame_principal.winfo_children():
             widget.destroy()
+            
+        try:
+            app.my_image = ctk.CTkImage(light_image=Image.open('archivosjson\\assets\\uade_una_gran_universidad.png'),
+                                         size=(400, 240))
+        except Exception as e:
+            print(f"Error al cargar la imagen: {e}")
+            app.my_image = None
 
         # Mostrar campos editables
         ctk.CTkLabel(frame_principal, text="Modificar Alumno", font=("Arial", 24), text_color="#061b2c").pack(pady=10)

@@ -9,7 +9,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
         widget.destroy()
         
     try:
-        image = ctk.CTkImage(light_image=Image.open("assets\\uade_una_gran_universidad.png"),
+        image = ctk.CTkImage(light_image=Image.open('archivosjson\\assets\\uade_una_gran_universidad.png'),
                                      size=(200, 120))
     except Exception as e:
         print(f"Error al cargar la imagen: {e}")
@@ -26,7 +26,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             widget.destroy()
             
         try: #cargar imagen
-            image = ctk.CTkImage(light_image=Image.open("assets\\uade_una_gran_universidad.png"),
+            image = ctk.CTkImage(light_image=Image.open('archivosjson\\assets\\uade_una_gran_universidad.png'),
                                      size=(200, 120))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
@@ -54,7 +54,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             widget.destroy()
             
         try:
-            image = ctk.CTkImage(light_image=Image.open("assets\\uade_una_gran_universidad.png"),
+            image = ctk.CTkImage(light_image=Image.open('archivosjson\\assets\\uade_una_gran_universidad.png'),
                                          size=(200, 120))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
@@ -105,7 +105,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             widget.destroy()
             
         try:
-            image = ctk.CTkImage(light_image=Image.open("assets\\uade_una_gran_universidad.png"),
+            image = ctk.CTkImage(light_image=Image.open('archivosjson\\assets\\uade_una_gran_universidad.png'),
                                          size=(400, 240))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
