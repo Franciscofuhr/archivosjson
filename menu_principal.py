@@ -21,7 +21,7 @@ class App(ctk.CTk):
 
         # Cargar la imagen como una variable
         try:
-            self.my_image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
+            self.my_image = ctk.CTkImage(light_image=Image.open("assets\\uade_una_gran_universidad.png"),
                                          size=(400, 240))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
@@ -37,7 +37,7 @@ class App(ctk.CTk):
 
     def cargar_datos(self): # Cargar los datos de los alumnos desde el archivo CSV
 
-        with open('C:/Users/lauta/OneDrive/Escritorio/archivosjson/datosAlumnos.csv', mode='r') as archivo_csv:
+        with open('datosAlumnos.csv', mode='r') as archivo_csv:
             lector_csv = csv.DictReader(archivo_csv, delimiter=';')
             return [fila for fila in lector_csv]
 
