@@ -1,5 +1,7 @@
 import customtkinter as ctk
 from funciones_delete.eliminar_alumno import eliminar_fila_csv
+from utils.utils import validar_es_numero, eliminar_widget
+
 
 def mostrar_menu_delete(frame_principal, app):
     # Clear the frame first
@@ -17,8 +19,17 @@ def mostrar_menu_delete(frame_principal, app):
     label_mensaje = ctk.CTkLabel(frame_principal, text="", text_color="red")
     label_mensaje.pack(pady=5)
 
+    def vaciar_mensaje():
+        label_mensaje.configure(text="")
+
     def eliminar_alumno():
         try:
+            if not validar_es_numero(entry_legajo):
+                error_legajo = ctk.CTkLabel(frame_principal, text="El legajo debe ser un numero", text_color="red")
+                error_legajo.pack(pady=5)
+                error_legajo.after(3000,lambda: eliminar_widget(error_legajo))
+                return
+            
             legajo = int(entry_legajo.get())
             if eliminar_fila_csv(legajo):
                 # Update message label to show success

@@ -24,8 +24,6 @@ def eliminar_fila_csv(legajo_a_eliminar):
                 fila_eliminada = True  
             else:
                 filas_restantes.append(fila)  # Mantiene las filas que no se eliminan
-    if not fila_eliminada:
-        raise ValueError(f"Ingrese un número de legajo válido.")
     
     # Si se eliminó alguna fila, reescribimos el archivo
     if fila_eliminada:
