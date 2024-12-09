@@ -15,7 +15,7 @@ class TestActualizarAlumno(unittest.TestCase):
         modificar_fila_csv(9999, nuevo_nombre="aaaaaaaaaaaaa", nuevo_apellido="Carnuccio", nueva_nota1=70, nueva_nota2=80)
 
         # traer datos del csv
-        with open('C:/Users/lauta/OneDrive/Escritorio/archivosjson/datosAlumnos.csv', mode='r') as file:
+        with open('archivosjson\\datosAlumnos.csv', mode='r') as file:
             reader = csv.reader(file, delimiter=';') 
             lista = list(reader)
 

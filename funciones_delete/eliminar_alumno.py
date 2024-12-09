@@ -2,7 +2,7 @@ import csv
 import os
 
 def eliminar_fila_csv(legajo_a_eliminar):
-    ruta_archivo = 'C:/Users/lauta/OneDrive/Escritorio/archivosjson/datosAlumnos.csv'
+    ruta_archivo = 'archivosjson\\datosAlumnos.csv'
     
     # Verificamos si el archivo existe
     if not os.path.exists(ruta_archivo):

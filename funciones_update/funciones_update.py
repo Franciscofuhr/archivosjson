@@ -2,7 +2,7 @@ import csv
 import os
 
 def modificar_fila_csv(legajo_a_modificar, nuevo_nombre=None, nuevo_apellido=None, nueva_nota1=None, nueva_nota2=None):
-    ruta_archivo = 'C:/Users/lauta/OneDrive/Escritorio/archivosjson/datosAlumnos.csv'
+    ruta_archivo = 'archivosjson\\datosAlumnos.csv'
     
     if not os.path.exists(ruta_archivo):
         print("El archivo no existe.")
