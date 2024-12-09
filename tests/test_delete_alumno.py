@@ -5,7 +5,7 @@ from funciones_create.crear_alumno import agregar_fila_csv
 
 class TestEliminarAlumno(unittest.TestCase):
     def setUp(self):
-        self.ruta_archivo = '/archivosjson/datosAlumnos.csv'
+        self.ruta_archivo = 'archivosjson\\datosAlumnos.csv'
         
     # Eliminar alumno existente
     def test_eliminar_alumno_existente(self):
@@ -19,7 +19,7 @@ class TestEliminarAlumno(unittest.TestCase):
         
         eliminar_fila_csv(9999)
         
-        with open('/datosAlumnos.csv', mode='r') as file:
+        with open('archivosjson\\datosAlumnos.csv', mode='r') as file:
             reader = csv.reader(file)
             rows = list(reader) # obtener la lista de alumnos
         
