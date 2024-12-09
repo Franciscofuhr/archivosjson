@@ -6,7 +6,7 @@ from funciones_create.crear_alumno import agregar_fila_csv
 class TestCrearAlumno(unittest.TestCase):
 
     def setUp(self):
-        self.ruta_archivo = 'C:/Users/lauta/OneDrive/Escritorio/archivosjson/datosAlumnos.csv'
+        self.ruta_archivo = '/archivosjson/datosAlumnos.csv'
 
     def test_agregar_fila_csv(self,):
         legajo = 9999
