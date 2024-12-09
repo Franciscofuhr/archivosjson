@@ -24,22 +24,24 @@ def mostrar_menu_delete(frame_principal, app):
 
     def eliminar_alumno():
         try:
-            if not validar_es_numero(entry_legajo):
-                error_legajo = ctk.CTkLabel(frame_principal, text="El legajo debe ser un numero", text_color="red")
-                error_legajo.pack(pady=5)
-                error_legajo.after(3000,lambda: eliminar_widget(error_legajo))
+            if not validar_es_numero(entry_legajo.get()):
+                label_mensaje.configure(text="El legajo debe ser un numero", text_color="red")
+                label_mensaje.after(3000,lambda: vaciar_mensaje())
                 return
             
             legajo = int(entry_legajo.get())
             if eliminar_fila_csv(legajo):
                 # Update message label to show success
                 label_mensaje.configure(text="El alumno con Legajo: " + str(legajo) + " fue eliminado exitosamente.", text_color="green")
+                label_mensaje.after(3000,lambda: vaciar_mensaje())
             else:
                 # Update message label to show error for not found
                 label_mensaje.configure(text="Legajo no encontrado.", text_color="red")
+                label_mensaje.after(3000,lambda: vaciar_mensaje())
         except ValueError:
             # Update message label to show error for invalid input
             label_mensaje.configure(text="Ingrese un número de legajo válido.", text_color="red")
+            label_mensaje.after(3000,lambda: vaciar_mensaje())
 
     # Delete button to trigger the delete function
     boton_eliminar = ctk.CTkButton(frame_principal, text="Eliminar", fg_color="red", width=200, command=eliminar_alumno)

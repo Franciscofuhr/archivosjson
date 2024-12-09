@@ -114,7 +114,9 @@ def mostrar_menu_update(frame_principal, app):
 
             # Guardar las modificaciones
             modificar_fila_csv(legajo, nuevo_nombre, nuevo_apellido, nueva_nota1, nueva_nota2)
-            ctk.CTkLabel(frame_principal, text="¡Alumno modificado con éxito!", font=("Arial", 16), text_color="green").pack(pady=10)
+            eliminado_exito = ctk.CTkLabel(frame_principal, text="¡Alumno modificado con éxito!", font=("Arial", 16), text_color="green")
+            eliminado_exito.pack(pady=10)
+            eliminado_exito.after(3000,lambda: eliminar_widget(eliminado_exito))
 
         # Botón para guardar
         ctk.CTkButton(frame_principal, text="Guardar Cambios", fg_color="#061b2c", command=guardar_modificaciones).pack(pady=10)
