@@ -17,20 +17,18 @@ def mostrar_menu_delete(frame_principal, app):
         print(f"Error al cargar la imagen: {e}")
         ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
         
-    ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+    ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
 
 
     # Title and instruction label
     ctk.CTkLabel(frame_principal, text="Eliminar Alumno", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
-    ctk.CTkLabel(frame_principal, text="Ingrese el legajo del alumno a eliminar:", text_color="black").pack(pady=5)
+    ctk.CTkLabel(frame_principal, text="Ingrese el legajo del alumno a eliminar:", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
 
     # Input field for 'legajo'
-    entry_legajo = ctk.CTkEntry(frame_principal, width=200)
+    entry_legajo = ctk.CTkEntry(frame_principal, placeholder_text=f"Ingrese el Legajo", width=200)
     entry_legajo.pack(pady=5)
 
-    # Label to display success or error messages
-    label_mensaje = ctk.CTkLabel(frame_principal, text="", text_color="red")
-    label_mensaje.pack(pady=5)
+    
 
     def vaciar_mensaje():
         label_mensaje.configure(text="")

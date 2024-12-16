@@ -1,11 +1,4 @@
 Legajo;Nombre;Apellido;nota1;nota2
-2;Pedro;Perez;90;80
-3;Juana;Liz;100;98
-4;Ana;Gonzalez;76;88
-5;Carlos;Lopez;64;55
-6;Luis;Garcia;95;92
-7;Maria;Fernandez;85;22
-8;Jorge;Ramirez;59;67
 9;Elena;Hernandez;78;82
 10;Laura;Ruiz;89;91
 11;Sofia;Diaz;93;89
@@ -50,3 +43,4 @@ Legajo;Nombre;Apellido;nota1;nota2
 333;Juan;Perez;90;20
 190;Juan;Perez;90;55
 55;Alejandro;Garnacho;100;99
+1234;qwe;qweqweq;12;31

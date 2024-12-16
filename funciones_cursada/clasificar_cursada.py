@@ -43,8 +43,12 @@ def mostrar_resultados(frame_principal, lista, tipo):
         ctk.CTkLabel(frame_principal, image=image, text="").pack()
     else:
         ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
+        
+    ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
+    ctk.CTkLabel(frame_principal, text=(f"Estado de Cursada"), font=("Arial", 20), text_color="#061b2c").pack(pady=5)
+    ctk.CTkLabel(frame_principal, text=(f"{tipo.upper()}"), font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
-    resultados_text = f"{tipo.upper()}\n" # Almacenar datos
+    resultados_text = "" # Almacenar datos
     
     # Cargar datos si hay
     if lista:
@@ -82,7 +86,7 @@ def mostrar_menu_cursada(frame, lista_diccionarios):
     else:
         ctk.CTkLabel(frame, text="No se pudo cargar la imagen").pack()
         
-    ctk.CTkLabel(frame, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)    
+    ctk.CTkLabel(frame, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)    
     ctk.CTkLabel(frame, text="Estado de Cursada", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
     # Clasificar los alumnos una sola vez y mostrar los resultados

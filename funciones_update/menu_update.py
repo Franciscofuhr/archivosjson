@@ -22,12 +22,12 @@ def mostrar_menu_update(frame_principal, app):
             print(f"Error al cargar la imagen: {e}")
             ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
             
-        ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+        ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
 
         # Título y campos de entrada
         ctk.CTkLabel(frame_principal, text="Modificar Alumno", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
-        ctk.CTkLabel(frame_principal, text="Ingrese Legajo del Alumno", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
-        legajo_entry = ctk.CTkEntry(frame_principal, placeholder_text="Legajo del alumno", width=200)
+        ctk.CTkLabel(frame_principal, text="Ingrese el legajo del alumno a modificar:", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
+        legajo_entry = ctk.CTkEntry(frame_principal, placeholder_text=f"Ingrese el Legajo", width=200)
         legajo_entry.pack(pady=5)
 
         def buscar_y_mostrar():
@@ -63,31 +63,35 @@ def mostrar_menu_update(frame_principal, app):
         for widget in frame_principal.winfo_children():
             widget.destroy()
             
+        # Cargar y mostrar la imagen
         try:
-            app.my_image = ctk.CTkImage(light_image=Image.open('archivosjson\\assets\\uade_una_gran_universidad.png'),
-                                         size=(400, 240))
+            image = ctk.CTkImage(light_image=Image.open("archivosjson\\assets\\uade_una_gran_universidad.png"),
+                             size=(200, 120))
+            ctk.CTkLabel(frame_principal, image=image, text="").pack()
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
-            app.my_image = None
+            ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
 
+        ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
+        
         # Mostrar campos editables
         ctk.CTkLabel(frame_principal, text="Modificar Alumno", font=("Arial", 24), text_color="#061b2c").pack(pady=10)
         
-        ctk.CTkLabel(frame_principal, text="Nombre", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
+        ctk.CTkLabel(frame_principal, text="Nombre", font=("Arial", 16), text_color="#061b2c").pack(pady=0)
         nombre_entry = ctk.CTkEntry(frame_principal, placeholder_text=alumno["Nombre"], width=200)
-        nombre_entry.pack(pady=5)
+        nombre_entry.pack(pady=0)
         
-        ctk.CTkLabel(frame_principal, text="Apellido", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
+        ctk.CTkLabel(frame_principal, text="Apellido", font=("Arial", 16), text_color="#061b2c").pack(pady=0)
         apellido_entry = ctk.CTkEntry(frame_principal, placeholder_text=alumno["Apellido"], width=200)
-        apellido_entry.pack(pady=5)
+        apellido_entry.pack(pady=0)
         
-        ctk.CTkLabel(frame_principal, text="Nota 1er Parcial", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
+        ctk.CTkLabel(frame_principal, text="Nota 1er Parcial", font=("Arial", 16), text_color="#061b2c").pack(pady=0)
         nota1_entry = ctk.CTkEntry(frame_principal, placeholder_text=alumno["nota1"], width=200)
-        nota1_entry.pack(pady=5)
+        nota1_entry.pack(pady=0)
         
-        ctk.CTkLabel(frame_principal, text="Nota 2do Parcial", font=("Arial", 16), text_color="#061b2c").pack(pady=5)
+        ctk.CTkLabel(frame_principal, text="Nota 2do Parcial", font=("Arial", 16), text_color="#061b2c").pack(pady=0)
         nota2_entry = ctk.CTkEntry(frame_principal, placeholder_text=alumno["nota2"], width=200)
-        nota2_entry.pack(pady=5)
+        nota2_entry.pack(pady=0)
 
         def guardar_modificaciones():
             # Obtener los nuevos valores

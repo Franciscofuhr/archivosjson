@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from PIL import Image
-from utils.utils import eliminar_widget 
+from utils.utils import eliminar_widget, validar_es_numero, validar_sin_numeros
 
 def buscar_alumno(lista_diccionarios, frame_principal):
     
@@ -10,7 +10,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
         
     try:
         image = ctk.CTkImage(light_image=Image.open('archivosjson\\assets\\uade_una_gran_universidad.png'),
-                                     size=(200, 120))
+                                     size=(400, 240))
     except Exception as e:
         print(f"Error al cargar la imagen: {e}")
         image = None
@@ -55,7 +55,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             
         try:
             image = ctk.CTkImage(light_image=Image.open('archivosjson\\assets\\uade_una_gran_universidad.png'),
-                                         size=(200, 120))
+                                         size=(400, 240))
         except Exception as e:
             print(f"Error al cargar la imagen: {e}")
             image = None
@@ -65,8 +65,8 @@ def buscar_alumno(lista_diccionarios, frame_principal):
         else:
             ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
             
-        ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
-        ctk.CTkLabel(frame_principal, text="Búsqueda", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
+        ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
+        ctk.CTkLabel(frame_principal, text=(f"Búsqueda por {criterio}"), font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
         entry = ctk.CTkEntry(frame_principal, placeholder_text=f"Ingrese el {criterio}") # Tomar criterio del usuario
         entry.pack(pady=5)
@@ -76,6 +76,23 @@ def buscar_alumno(lista_diccionarios, frame_principal):
             valor = entry.get().lower()
             resultado = None
 
+            if criterio == "ID" and not validar_es_numero(valor):
+                id_no_valido = ctk.CTkLabel(frame_principal, text="El valor ingresado no debe contener letras.", text_color="red")
+                id_no_valido.pack(pady=10)
+                id_no_valido.after(3000,lambda: eliminar_widget(id_no_valido))
+                return
+
+            if criterio == "Nombre" and not validar_sin_numeros(valor):
+                texto_invalido = ctk.CTkLabel(frame_principal, text="El valor ingresado no debe contener numeros.", text_color="red")
+                texto_invalido.pack(pady=10)
+                texto_invalido.after(3000,lambda: eliminar_widget(texto_invalido))
+                return
+
+            if criterio == "Apellido" and not validar_sin_numeros(valor):
+                texto_invalido = ctk.CTkLabel(frame_principal, text="El valor ingresado no debe contener numeros.", text_color="red")
+                texto_invalido.pack(pady=10)
+                texto_invalido.after(3000,lambda: eliminar_widget(texto_invalido))
+                return
             
             # Buscar por criterio (ID, Nombre o Apellido)
             for persona in lista_diccionarios:
@@ -116,7 +133,7 @@ def buscar_alumno(lista_diccionarios, frame_principal):
         else:
             ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
             
-        ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+        ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
         ctk.CTkLabel(frame_principal, text="Opciones de búsqueda", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
         boton_buscar_id = ctk.CTkButton(frame_principal, text="Buscar por Legajo", fg_color="#061b2c", width=200, command=lambda: buscar_por_criterio('ID'))

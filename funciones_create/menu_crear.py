@@ -1,6 +1,6 @@
 import customtkinter as ctk
 import csv
-from utils.utils import validar_es_numero, validar_numero_rango, validar_sin_numeros 
+from utils.utils import validar_es_numero, validar_numero_rango, validar_sin_numeros, eliminar_widget
 from funciones_create.crear_alumno import agregar_fila_csv
 from PIL import Image
 
@@ -21,7 +21,7 @@ def mostrar_menu_crear(frame):
     else:
         ctk.CTkLabel(frame, text="No se pudo cargar la imagen").pack()
         
-    ctk.CTkLabel(frame, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+    ctk.CTkLabel(frame, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
 
     # Crear los campos de entrada para el nuevo alumno
     ctk.CTkLabel(frame, text="Crear Nuevo Alumno", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
@@ -29,29 +29,29 @@ def mostrar_menu_crear(frame):
     # Campos de texto para ingresar los datos del alumno
     legajo_label = ctk.CTkLabel(frame, text="Legajo", text_color="#061b2c")
     legajo_label.pack(pady=0)
-    legajo_entry = ctk.CTkEntry(frame, width=200)
+    legajo_entry = ctk.CTkEntry(frame, placeholder_text=f"Ingrese el Legajo", width=200)
     legajo_entry.pack(pady=0)
 
     nombre_label = ctk.CTkLabel(frame, text="Nombre", text_color="#061b2c")
     nombre_label.pack(pady=0)
-    nombre_entry = ctk.CTkEntry(frame, width=200)
+    nombre_entry = ctk.CTkEntry(frame, placeholder_text=f"Ingrese el Nombre",width=200)
     nombre_entry.pack(pady=0)
 
     apellido_label = ctk.CTkLabel(frame, text="Apellido", text_color="#061b2c")
     apellido_label.pack(pady=0)
-    apellido_entry = ctk.CTkEntry(frame, width=200)
+    apellido_entry = ctk.CTkEntry(frame, placeholder_text=f"Ingrese el Apellido",width=200)
     apellido_entry.pack(pady=0)
 
     # Nota 1er Parcial
     nota1_label = ctk.CTkLabel(frame, text="Nota 1er Parcial", text_color="#061b2c")
     nota1_label.pack(pady=0)
-    nota1_entry = ctk.CTkEntry(frame, width=200)
+    nota1_entry = ctk.CTkEntry(frame, placeholder_text=f"Ingrese nota del 1er Parcial",width=200)
     nota1_entry.pack(pady=0)
 
     # Nota 2do Parcial
     nota2_label = ctk.CTkLabel(frame, text="Nota 2do Parcial", text_color="#061b2c")
     nota2_label.pack(pady=0)
-    nota2_entry = ctk.CTkEntry(frame, width=200)
+    nota2_entry = ctk.CTkEntry(frame, placeholder_text=f"Ingrese nota del 2do Parcial",width=200)
     nota2_entry.pack(pady=0)
 
 
@@ -95,6 +95,8 @@ def mostrar_menu_crear(frame):
             # Mensaje de éxito
             mensaje_exito = ctk.CTkLabel(frame, text="Alumno creado exitosamente", text_color="green")
             mensaje_exito.pack(pady=5)
+            mensaje_exito.after(3000,lambda: eliminar_widget(mensaje_exito))
+
 
             # Limpiar los campos después de guardar
             legajo_entry.delete(0, 'end')

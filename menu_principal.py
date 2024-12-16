@@ -12,7 +12,7 @@ class App(ctk.CTk):
 
         # Personalización
         self.title("Programa de Notas Estudiantiles")
-        self.geometry("900x700")
+        self.geometry("1366x768")
         self._set_appearance_mode("system")
         self.configure(fg_color="#061b2c")
 
@@ -53,7 +53,7 @@ class App(ctk.CTk):
             ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
 
         # Título del menú
-        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
         ctk.CTkLabel(self.frame_principal, text="Menú Principal", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
         # Botones del menú principal
@@ -73,7 +73,7 @@ class App(ctk.CTk):
         else:
             ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
 
-        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
         ctk.CTkLabel(self.frame_principal, text="Alumnos", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
         # Botones para gestionar alumnos
@@ -108,7 +108,7 @@ class App(ctk.CTk):
         else:
             ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
         
-        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
         ctk.CTkLabel(self.frame_principal, text="Notas de Parciales", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
         ctk.CTkButton(self.frame_principal, text="1er Parcial", fg_color="#061b2c", width=200, command=lambda: self.ejecutar_opcion_parcial("1")).pack(pady=5)
@@ -138,7 +138,7 @@ class App(ctk.CTk):
         else:
             ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
             
-        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
         ejecutar_opcion_cursada(self.lista_diccionarios, self.frame_principal)
 
     # Buscar alumnos en el archivo CSV
@@ -150,7 +150,7 @@ class App(ctk.CTk):
         else:
             ctk.CTkLabel(self.frame_principal, text="No se pudo cargar la imagen").pack()
             
-        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
+        ctk.CTkLabel(self.frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
         buscar_alumno(self.lista_diccionarios, self.frame_principal)
 
     # Limpiar el contenido del frame actual

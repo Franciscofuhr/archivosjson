@@ -61,8 +61,8 @@ def mostrar_botones_resultados(frame_principal, aprobados, desaprobados, parcial
     else:
         ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
         
-    ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("#061b2c", 24), text_color="black").pack(pady=5)
-    ctk.CTkLabel(frame_principal, text="Notas de Parciales", font=("Arial", 20), text_color="#061b2c").pack(pady=5)
+    ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
+    ctk.CTkLabel(frame_principal, text=(f"Notas del {parcial_nombre}"), font=("Arial", 20), text_color="#061b2c").pack(pady=5)
 
     # Botones para mostrar aprobados y desaprobados
     boton_aprobados = ctk.CTkButton(frame_principal, text=f"Mostrar Aprobados", fg_color="#061b2c", width=200,
@@ -94,7 +94,11 @@ def mostrar_resultados(frame_principal, lista, parcial_nombre, tipo):
     else:
         ctk.CTkLabel(frame_principal, text="No se pudo cargar la imagen").pack()
 
-    resultados_text = f"{parcial_nombre.upper()} - {tipo.upper()}\n" #Almacenar resultado
+    ctk.CTkLabel(frame_principal, text="Programa de Notas Estudiantiles", font=("Arial", 24), text_color="#061b2c").pack(pady=5)
+    ctk.CTkLabel(frame_principal, text=(f"Notas del {parcial_nombre}"), font=("Arial", 20), text_color="#061b2c").pack(pady=5)
+    ctk.CTkLabel(frame_principal, text=(f"{tipo.upper()}"), font=("Arial", 20), text_color="#061b2c").pack(pady=5)
+    
+    resultados_text = "" #Almacenar resultado
     if lista:
         for alumno in lista:
             resultados_text += f"Legajo: {alumno[0]}, Apellido: {alumno[2]}, Nombre: {alumno[1]}, Nota {parcial_nombre}: {alumno[3]}\n"
